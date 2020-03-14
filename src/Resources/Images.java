@@ -28,6 +28,7 @@ public class Images {
     public static BufferedImage[] galagaEnemyBee;
 
     public static BufferedImage map1;
+    public static BufferedImage[] officialPacLogo;
     public static BufferedImage ghost;
     public static BufferedImage[] pacmanDots;
     public static BufferedImage[] pacmanRight;
@@ -64,6 +65,7 @@ public class Images {
         pacmanUp = new BufferedImage[2];
         pacmanDown = new BufferedImage[2];
         bound = new BufferedImage[16];
+        officialPacLogo = new BufferedImage[3];
 
 
         try {
@@ -87,6 +89,10 @@ public class Images {
             galagaLogo[0] = ImageIO.read(getClass().getResourceAsStream("/UI/Misc/galaga_logo.png"));
             galagaLogo[1] = ImageIO.read(getClass().getResourceAsStream("/UI/Buttons/Selection/Galaga/hover_galaga_logo.png"));
             galagaLogo[2] = ImageIO.read(getClass().getResourceAsStream("/UI/Buttons/Selection/Galaga/pressed_galaga_logo.png"));
+            
+            officialPacLogo[0] = ImageIO.read(getClass().getResourceAsStream("/UI/Misc/Pac-Man_logo.png"));
+            officialPacLogo[1] = ImageIO.read(getClass().getResourceAsStream("/UI/Misc/Pac-Man_logo2.png"));
+            officialPacLogo[2] = ImageIO.read(getClass().getResourceAsStream("/UI/Misc/Pac-Man_logo2.png"));
 
             pauseResumeButton[0] = ImageIO.read(getClass().getResourceAsStream("/UI/Buttons/Pause/Resume/NormalHoverResume.png"));
             pauseResumeButton[1] = ImageIO.read(getClass().getResourceAsStream("/UI/Buttons/Pause/Resume/PressedResume.png"));
