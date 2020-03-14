@@ -91,7 +91,7 @@ public class Images {
             galagaLogo[2] = ImageIO.read(getClass().getResourceAsStream("/UI/Buttons/Selection/Galaga/pressed_galaga_logo.png"));
             
             officialPacLogo[0] = ImageIO.read(getClass().getResourceAsStream("/UI/Misc/Pac-Man_logo.png"));
-            officialPacLogo[1] = ImageIO.read(getClass().getResourceAsStream("/UI/Misc/Pac-Man_logo2.png"));
+            officialPacLogo[1] = ImageIO.read(getClass().getResourceAsStream("/UI/Misc/Pac-Man_logo1.png"));
             officialPacLogo[2] = ImageIO.read(getClass().getResourceAsStream("/UI/Misc/Pac-Man_logo2.png"));
 
             pauseResumeButton[0] = ImageIO.read(getClass().getResourceAsStream("/UI/Buttons/Pause/Resume/NormalHoverResume.png"));
