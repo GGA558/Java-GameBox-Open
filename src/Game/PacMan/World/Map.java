@@ -3,6 +3,7 @@ package Game.PacMan.World;
 import Game.PacMan.entities.Dynamics.BaseDynamic;
 import Game.PacMan.entities.Dynamics.PacMan;
 import Game.PacMan.entities.Statics.BaseStatic;
+import Game.PacMan.entities.Statics.BigDot;
 import Main.Handler;
 
 import java.awt.*;
@@ -16,7 +17,8 @@ public class Map {
     Handler handler;
     private double bottomBorder;
     private Random rand;
-    private int mapBackground;
+    private int mapBackground, toggle = 0;
+    private boolean isOn = true;
 
     public Map(Handler handler) {
         this.handler=handler;
@@ -38,11 +40,21 @@ public class Map {
     }
 
     public void drawMap(Graphics2D g2) {
+    	toggle++;
+		if(toggle % 12 == 0) {
+			isOn = !isOn;
+		}
         for (BaseStatic block:blocksOnMap) {
-
+        	if(block instanceof BigDot) {
+        		if(isOn) {
+        			block.sprite = Resources.Images.pacmanDots[0];
+				}else {
+					block.sprite = Resources.Images.pacmanDots[2];	
+				}
+			}
             g2.drawImage(block.sprite, block.x, block.y, block.width, block.height, null);
-
         }
+        
         for (BaseDynamic entity:enemiesOnMap) {
             if (entity instanceof PacMan) {
                 switch (((PacMan) entity).facing){

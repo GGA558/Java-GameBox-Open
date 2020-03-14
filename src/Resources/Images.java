@@ -59,7 +59,7 @@ public class Images {
         galagaEnemyDeath = new BufferedImage[5];
         galagaEnemyBee = new BufferedImage[8];
 
-        pacmanDots = new BufferedImage[2];
+        pacmanDots = new BufferedImage[3];
         pacmanRight = new BufferedImage[2];
         pacmanLeft = new BufferedImage[2];
         pacmanUp = new BufferedImage[2];
@@ -141,6 +141,7 @@ public class Images {
             ghost = pacmanSpriteSheet.crop(456,64,16,16);
             pacmanDots[0] = pacmanSpriteSheet.crop(643,18,16,16);
             pacmanDots[1] = pacmanSpriteSheet.crop(623,18,16,16);
+            pacmanDots[2] = pacmanSpriteSheet.crop(663, 18, 16, 16);
 
             bound[0] = pacmanSpriteSheet.crop(603,18,16,16);//single
             bound[1] = pacmanSpriteSheet.crop(615,37,16,16);//right open
