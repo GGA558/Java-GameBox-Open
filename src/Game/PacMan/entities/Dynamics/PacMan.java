@@ -17,6 +17,7 @@ public class PacMan extends BaseDynamic{
     public boolean moving = true,turnFlag = false;
     public Animation leftAnim,rightAnim,upAnim,downAnim;
     int turnCooldown = 20;
+    private int health = 3;
 
 
     public PacMan(int x, int y, int width, int height, Handler handler) {
@@ -25,6 +26,7 @@ public class PacMan extends BaseDynamic{
         rightAnim = new Animation(128,Images.pacmanRight);
         upAnim = new Animation(128,Images.pacmanUp);
         downAnim = new Animation(128,Images.pacmanDown);
+        this.health = health;
     }
 
     @Override
@@ -206,6 +208,12 @@ public class PacMan extends BaseDynamic{
     }
     public double getVelY() {
         return velY;
+    }
+    public int getHealth() {
+    	return health;
+    }
+    public int setHealth() {
+    	return health;
     }
 
 

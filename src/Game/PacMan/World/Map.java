@@ -6,6 +6,7 @@ import Game.PacMan.entities.Statics.BaseStatic;
 import Game.PacMan.entities.Statics.BigDot;
 import Game.PacMan.entities.Statics.Dot;
 import Main.Handler;
+import Resources.Images;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -52,6 +53,9 @@ public class Map {
 		}if(toggle >= 60) {
 			toggle = 0;
 		}
+		for (int i = 0; i< handler.getPacman().getHealth();i++) {
+            g2.drawImage(Images.pacmanRight[0], (handler.getWidth() - handler.getWidth() / 4 - handler.getWidth() / 15) + ((handler.getPacman().width*5)*i), handler.getHeight()-handler.getHeight()/4, handler.getWidth() / 18, handler.getHeight() / 12, null);
+        }
         for (BaseStatic block:blocksOnMap) {
         	if(block instanceof BigDot) {
         		if(isOn) {//Big Dot appears
