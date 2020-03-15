@@ -19,6 +19,7 @@ public class Map {
     private Random rand;
     private int mapBackground, toggle = 0;
     private boolean isOn = true;
+    // toggle and isOn are used to make the dots blink.
 
     public Map(Handler handler) {
         this.handler=handler;
@@ -40,15 +41,21 @@ public class Map {
     }
 
     public void drawMap(Graphics2D g2) {
+    	/*Every 12 ticks, flip the switch(isOn)
+    	 *I need to reset toggle eventually because ints have a finite ammount of numbers it can use.
+    	 *toggle resets every 60 ticks.
+    	 */
     	toggle++;
 		if(toggle % 12 == 0) {
 			isOn = !isOn;
+		}if(toggle >= 60) {
+			toggle = 0;
 		}
         for (BaseStatic block:blocksOnMap) {
         	if(block instanceof BigDot) {
-        		if(isOn) {
+        		if(isOn) {//Big Dot appears
         			block.sprite = Resources.Images.pacmanDots[0];
-				}else {
+				}else {//Big Dot disappears
 					block.sprite = Resources.Images.pacmanDots[2];	
 				}
 			}
