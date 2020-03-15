@@ -4,6 +4,7 @@ import Game.PacMan.entities.Dynamics.BaseDynamic;
 import Game.PacMan.entities.Dynamics.PacMan;
 import Game.PacMan.entities.Statics.BaseStatic;
 import Game.PacMan.entities.Statics.BigDot;
+import Game.PacMan.entities.Statics.Dot;
 import Main.Handler;
 
 import java.awt.*;
@@ -57,6 +58,10 @@ public class Map {
         			block.sprite = Resources.Images.pacmanDots[0];
 				}else {//Big Dot disappears
 					block.sprite = Resources.Images.pacmanDots[2];	
+				}
+			}if(block instanceof Dot){
+				if(((Dot) block).fruitSprite != -1) {
+					block.sprite = Resources.Images.pacmanFruits[((Dot) block).fruitSprite];
 				}
 			}
             g2.drawImage(block.sprite, block.x, block.y, block.width, block.height, null);

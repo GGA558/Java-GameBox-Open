@@ -38,6 +38,8 @@ public class Images {
     public static BufferedImage[] bound;
     public static BufferedImage intro;
     public static BufferedImage start;
+    // fruit sprites
+    public static BufferedImage[] pacmanFruits;
 
 
 
@@ -60,6 +62,7 @@ public class Images {
         galagaEnemyBee = new BufferedImage[8];
 
         pacmanDots = new BufferedImage[3];
+        pacmanFruits = new BufferedImage[5];
         pacmanRight = new BufferedImage[2];
         pacmanLeft = new BufferedImage[2];
         pacmanUp = new BufferedImage[2];
@@ -142,6 +145,13 @@ public class Images {
             pacmanDots[0] = pacmanSpriteSheet.crop(643,18,16,16);
             pacmanDots[1] = pacmanSpriteSheet.crop(623,18,16,16);
             pacmanDots[2] = pacmanSpriteSheet.crop(663, 18, 16, 16);
+            
+            //Fruit sprites
+            pacmanFruits[0] = pacmanSpriteSheet.crop(490,49,13,14);
+            pacmanFruits[1] = pacmanSpriteSheet.crop(505,49,13,14);
+            pacmanFruits[2] = pacmanSpriteSheet.crop(521,49,14,14);
+            pacmanFruits[3] = pacmanSpriteSheet.crop(537,49,14,14);
+            pacmanFruits[4] = pacmanSpriteSheet.crop(554,49,13,15);
 
             bound[0] = pacmanSpriteSheet.crop(603,18,16,16);//single
             bound[1] = pacmanSpriteSheet.crop(615,37,16,16);//right open
