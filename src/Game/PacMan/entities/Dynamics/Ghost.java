@@ -16,7 +16,7 @@ public class Ghost extends BaseDynamic{
     protected double velX,velY,speed = 1;
     public String facing = "Up";
     public boolean moving = true,turnFlag = false,justSpawned = true;
-    public Animation leftAnim,rightAnim,upAnim,downAnim;
+    public Animation leftAnimG,rightAnimG,upAnimG,downAnimG;
     public Random rand = new Random();
     int turnCooldown = 30, direction;
 // justSpawned makes sure it doesn't crawl back into the hole it came from.
@@ -24,10 +24,10 @@ public class Ghost extends BaseDynamic{
 
     public Ghost(int x, int y, int width, int height, Handler handler) {
         super(x, y, width, height, handler, Images.ghost);
-        leftAnim = new Animation(128,Images.pacmanLeft);
-        rightAnim = new Animation(128,Images.pacmanRight);
-        upAnim = new Animation(128,Images.pacmanUp);
-        downAnim = new Animation(128,Images.pacmanDown);
+        leftAnimG = new Animation(128,Images.blinkyLeft);
+        rightAnimG = new Animation(128,Images.blinkyRight);
+        upAnimG = new Animation(128,Images.blinkyUp);
+        downAnimG = new Animation(128,Images.blinkyDown);
     }
 
     @Override
@@ -36,19 +36,19 @@ public class Ghost extends BaseDynamic{
         switch (facing){
             case "Right":
                 x+=velX;
-                rightAnim.tick();
+                rightAnimG.tick();
                 break;
             case "Left":
                 x-=velX;
-                leftAnim.tick();
+                leftAnimG.tick();
                 break;
             case "Up":
                 y-=velY;
-                upAnim.tick();
+                upAnimG.tick();
                 break;
             case "Down":
                 y+=velY;
-                downAnim.tick();
+                downAnimG.tick();
                 break;
         }
         if (turnCooldown<=0){

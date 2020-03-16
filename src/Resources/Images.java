@@ -35,6 +35,22 @@ public class Images {
     public static BufferedImage[] pacmanLeft;
     public static BufferedImage[] pacmanUp;
     public static BufferedImage[] pacmanDown;
+    public static BufferedImage[] blinkyRight;
+    public static BufferedImage[] blinkyLeft;
+    public static BufferedImage[] blinkyUp;
+    public static BufferedImage[] blinkyDown;
+    public static BufferedImage[] pinkyRight;
+    public static BufferedImage[] pinkyLeft;
+    public static BufferedImage[] pinkyUp;
+    public static BufferedImage[] pinkyDown;
+    public static BufferedImage[] inkyRight;
+    public static BufferedImage[] inkyLeft;
+    public static BufferedImage[] inkyUp;
+    public static BufferedImage[] inkyDown;
+    public static BufferedImage[] clydeRight;
+    public static BufferedImage[] clydeLeft;
+    public static BufferedImage[] clydeUp;
+    public static BufferedImage[] clydeDown;
     public static BufferedImage[] bound;
     public static BufferedImage intro;
     public static BufferedImage start;
@@ -67,6 +83,22 @@ public class Images {
         pacmanLeft = new BufferedImage[2];
         pacmanUp = new BufferedImage[2];
         pacmanDown = new BufferedImage[2];
+        blinkyRight = new BufferedImage[2];
+        blinkyLeft = new BufferedImage[2];
+        blinkyUp = new BufferedImage[2];
+        blinkyDown = new BufferedImage[2];
+        pinkyRight = new BufferedImage[2];
+        pinkyLeft = new BufferedImage[2];
+        pinkyUp = new BufferedImage[2];
+        pinkyDown = new BufferedImage[2];
+        inkyRight = new BufferedImage[2];
+        inkyLeft = new BufferedImage[2];
+        inkyUp = new BufferedImage[2];
+        inkyDown = new BufferedImage[2];
+        clydeRight = new BufferedImage[2];
+        clydeLeft = new BufferedImage[2];
+        clydeUp = new BufferedImage[2];
+        clydeDown = new BufferedImage[2];
         bound = new BufferedImage[16];
         officialPacLogo = new BufferedImage[3];
 
@@ -181,6 +213,42 @@ public class Images {
 
             pacmanDown[0] = pacmanSpriteSheet.crop(473,48,13,12);
             pacmanDown[1] = pacmanSpriteSheet.crop(489,1,13,13);
+            
+            blinkyRight[0] = pacmanSpriteSheet.crop(456, 64, 16, 16);
+            blinkyRight[1] = pacmanSpriteSheet.crop(472, 64, 16, 16);
+            pinkyRight[0] = pacmanSpriteSheet.crop(456, 80, 16, 16);
+            pinkyRight[1] = pacmanSpriteSheet.crop(472, 80, 16, 16);
+            inkyRight[0] = pacmanSpriteSheet.crop(456, 96, 16, 16);
+            inkyRight[1] = pacmanSpriteSheet.crop(472, 96, 16, 16);
+            clydeRight[0] = pacmanSpriteSheet.crop(456, 112, 16, 16);
+            clydeRight[1] = pacmanSpriteSheet.crop(472, 112, 16, 16);
+            
+            blinkyLeft[0] = pacmanSpriteSheet.crop(488, 64, 16, 16);
+            blinkyLeft[1] = pacmanSpriteSheet.crop(504, 64, 16, 16);
+            pinkyLeft[0] = pacmanSpriteSheet.crop(488, 80, 16, 16);
+            pinkyLeft[1] = pacmanSpriteSheet.crop(504, 80, 16, 16);
+            inkyLeft[0] = pacmanSpriteSheet.crop(488, 96, 16, 16);
+            inkyLeft[1] = pacmanSpriteSheet.crop(504, 96, 16, 16);
+            clydeLeft[0] = pacmanSpriteSheet.crop(488, 112, 16, 16);
+            clydeLeft[1] = pacmanSpriteSheet.crop(504, 112, 16, 16);
+            
+            blinkyUp[0] = pacmanSpriteSheet.crop(520, 64, 16, 16);
+            blinkyUp[1] = pacmanSpriteSheet.crop(536, 64, 16, 16);
+            pinkyUp[0] = pacmanSpriteSheet.crop(520, 80, 16, 16);
+            pinkyUp[1] = pacmanSpriteSheet.crop(536, 80, 16, 16);
+            inkyUp[0] = pacmanSpriteSheet.crop(520, 96, 16, 16);
+            inkyUp[1] = pacmanSpriteSheet.crop(536, 96, 16, 16);
+            clydeUp[0] = pacmanSpriteSheet.crop(520, 112, 16, 16);
+            clydeUp[1] = pacmanSpriteSheet.crop(536, 112, 16, 16);
+            
+            blinkyDown[0] = pacmanSpriteSheet.crop(552, 64, 16, 16);
+            blinkyDown[1] = pacmanSpriteSheet.crop(568, 64, 16, 16);
+            pinkyDown[0] = pacmanSpriteSheet.crop(552, 80, 16, 16);
+            pinkyDown[1] = pacmanSpriteSheet.crop(568, 80, 16, 16);
+            inkyDown[0] = pacmanSpriteSheet.crop(552, 96, 16, 16);
+            inkyDown[1] = pacmanSpriteSheet.crop(568, 96, 16, 16);
+            clydeDown[0] = pacmanSpriteSheet.crop(552, 112, 16, 16);
+            clydeDown[1] = pacmanSpriteSheet.crop(568, 112, 16, 16);
 
             intro = ImageIO.read(getClass().getResourceAsStream("/UI/SpriteSheets/PacMan/intro.png"));
             start = ImageIO.read(getClass().getResourceAsStream("/UI/Backgrounds/startScreen.png"));

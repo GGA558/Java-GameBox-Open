@@ -1,6 +1,7 @@
 package Game.PacMan.World;
 
 import Game.PacMan.entities.Dynamics.BaseDynamic;
+import Game.PacMan.entities.Dynamics.Ghost;
 import Game.PacMan.entities.Dynamics.PacMan;
 import Game.PacMan.entities.Statics.BaseStatic;
 import Game.PacMan.entities.Statics.BigDot;
@@ -85,6 +86,21 @@ public class Map {
                         break;
                     case "Down":
                         g2.drawImage(((PacMan) entity).downAnim.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+                        break;
+                }
+            }else if (entity instanceof Ghost) {
+                 switch (((Ghost) entity).facing){
+                    case "Right":
+                        g2.drawImage(((Ghost) entity).rightAnimG.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+                        break;
+                    case "Left":
+                        g2.drawImage(((Ghost) entity).leftAnimG.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+                        break;
+                    case "Up":
+                        g2.drawImage(((Ghost) entity).upAnimG.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
+                        break;
+                    case "Down":
+                        g2.drawImage(((Ghost) entity).downAnimG.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
                         break;
                 }
             }
