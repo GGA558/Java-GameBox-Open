@@ -27,8 +27,7 @@ public class Images {
     public static BufferedImage[] galagaEnemyDeath;
     public static BufferedImage[] galagaEnemyBee;
 
-    public static BufferedImage map1;
-    public static BufferedImage map2;
+    public static BufferedImage[] maps;
     public static BufferedImage[] officialPacLogo;
     public static BufferedImage ghost;
     public static BufferedImage[] pacmanDots;
@@ -78,6 +77,7 @@ public class Images {
         galagaEnemyDeath = new BufferedImage[5];
         galagaEnemyBee = new BufferedImage[8];
 
+        maps = new BufferedImage[3];
         pacmanDots = new BufferedImage[3];
         pacmanFruits = new BufferedImage[5];
         pacmanRight = new BufferedImage[2];
@@ -173,8 +173,9 @@ public class Images {
 
             pacmanImageSheet = ImageIO.read(getClass().getResourceAsStream("/UI/SpriteSheets/PacMan/Background.png"));
             pacmanSpriteSheet = new SpriteSheet(pacmanImageSheet);
-            map1 = ImageIO.read(getClass().getResourceAsStream("/UI/Backgrounds/PacManMaps/map1.png"));
-            map2 = ImageIO.read(getClass().getResourceAsStream("/UI/Backgrounds/PacManMaps/map2.png"));
+            maps[0] = ImageIO.read(getClass().getResourceAsStream("/UI/Backgrounds/PacManMaps/map1.png"));
+            maps[1] = ImageIO.read(getClass().getResourceAsStream("/UI/Backgrounds/PacManMaps/map2.png"));
+            maps[2] = ImageIO.read(getClass().getResourceAsStream("/UI/Backgrounds/PacManMaps/map3.png"));
             ghost = pacmanSpriteSheet.crop(456,64,16,16);
             pacmanDots[0] = pacmanSpriteSheet.crop(643,18,16,16);
             pacmanDots[1] = pacmanSpriteSheet.crop(623,18,16,16);
