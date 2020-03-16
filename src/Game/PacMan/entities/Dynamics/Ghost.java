@@ -104,8 +104,7 @@ public class Ghost extends BaseDynamic{
                         if(justSpawned) {
                         	direction = rand.nextInt(2);
                         	justSpawned = false;
-                        }
-                        else {direction = rand.nextInt(3);}
+                        }else {direction = rand.nextInt(2);}// I removed the Down option
                     	switch(direction) {
                     	case 0:
                     		facing = "Right";
@@ -119,7 +118,8 @@ public class Ghost extends BaseDynamic{
                     	}
                     }else {
 						ghost.setY(brick.getY() - brick.getDimension().height);
-					    direction = rand.nextInt(3);
+                        // I removed the Up option
+					    direction = rand.nextInt(2);
 					    switch (direction) {
 					    case 0:
 						    facing = "Right";
@@ -203,22 +203,24 @@ public class Ghost extends BaseDynamic{
                         velX = 0;
                         if (toRight) {
                             ghost.setX(brick.getX() - ghost.getDimension().width);
-    					    direction = rand.nextInt(3);
+                            // I removed the Left option
+    					    direction = rand.nextInt(2);
     					    switch (direction) {
     					    case 0:
     						    facing = "Down";
     						    break;
     					    case 1:
-    						    facing = "Left";
+    						    facing = "Up";
     						    break;
     					    case 2:
-    						    facing = "Up";
+    						    facing = "Left";
     						    break;
     					    }
                         }
                         else {
                             ghost.setX(brick.getX() + brick.getDimension().width);
-    					    direction = rand.nextInt(3);
+                            // I removed the Right option
+    					    direction = rand.nextInt(2);
     					    switch (direction) {
     					    case 0:
     						    facing = "Up";
