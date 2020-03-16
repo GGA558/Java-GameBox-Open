@@ -9,14 +9,16 @@ import Resources.Images;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Ghost extends BaseDynamic{
 
     protected double velX,velY,speed = 1;
-    public String facing = "Left";
-    public boolean moving = true,turnFlag = false;
+    public String facing = "Up";
+    public boolean moving = true,turnFlag = false,justSpawned = true;
     public Animation leftAnim,rightAnim,upAnim,downAnim;
-    int turnCooldown = 30;
+    public Random rand = new Random();
+    int turnCooldown = 30, direction;
 
 
     public Ghost(int x, int y, int width, int height, Handler handler) {
@@ -55,16 +57,21 @@ public class Ghost extends BaseDynamic{
         if (turnFlag){
             turnCooldown--;
         }
+        
+        /* Starts moving up, if hit boundblock, randomly check left or right first.
+         * moving left/right, randomly check up or down first. 
+         * if up/down || left/right not working, check the other direction
+         * 
+         */
 
-        if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)  || handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) && !turnFlag && checkPreHorizontalCollision("Right")){
-            facing = "Right";
+        if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP)  ||handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) && !turnFlag&& checkPreVerticalCollisions("Up")){
+            facing = "Up";
             turnFlag = true;
-
         }else if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) && !turnFlag&& checkPreHorizontalCollision("left")){
             facing = "Left";
             turnFlag = true;
-        }else if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP)  ||handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) && !turnFlag&& checkPreVerticalCollisions("Up")){
-            facing = "Up";
+        }else if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)  || handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) && !turnFlag && checkPreHorizontalCollision("Right")){
+            facing = "Right";
             turnFlag = true;
         }else if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)  || handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) && !turnFlag&& checkPreVerticalCollisions("Down")){
             facing = "Down";
@@ -96,10 +103,39 @@ public class Ghost extends BaseDynamic{
                 Rectangle brickBounds = !toUp ? brick.getTopBounds() : brick.getBottomBounds();
                 if (ghostBounds.intersects(brickBounds)) {
                     velY = 0;
-                    if (toUp)
+                    if (toUp) {
                         ghost.setY(brick.getY() + ghost.getDimension().height);
-                    else
-                        ghost.setY(brick.getY() - brick.getDimension().height);
+                        if(justSpawned) {
+                        	direction = rand.nextInt(2);
+                        	justSpawned = false;
+                        }
+                        else {direction = rand.nextInt(3);}
+                    	switch(direction) {
+                    	case 0:
+                    		facing = "Right";
+                    		break;
+                    	case 1:
+                    		facing = "Left";
+                    		break;
+                    	case 2:
+                    		facing = "Down";
+                    		break;
+                    	}
+                    }else {
+						ghost.setY(brick.getY() - brick.getDimension().height);
+					    direction = rand.nextInt(3);
+					    switch (direction) {
+					    case 0:
+						    facing = "Right";
+						    break;
+					    case 1:
+						    facing = "Left";
+						    break;
+					    case 2:
+						    facing = "Up";
+						    break;
+					    }
+                	}
                 }
             }
         }
@@ -169,10 +205,36 @@ public class Ghost extends BaseDynamic{
                     Rectangle brickBounds = !toRight ? brick.getRightBounds() : brick.getLeftBounds();
                     if (ghostBounds.intersects(brickBounds)) {
                         velX = 0;
-                        if (toRight)
+                        if (toRight) {
                             ghost.setX(brick.getX() - ghost.getDimension().width);
-                        else
+    					    direction = rand.nextInt(3);
+    					    switch (direction) {
+    					    case 0:
+    						    facing = "Down";
+    						    break;
+    					    case 1:
+    						    facing = "Left";
+    						    break;
+    					    case 2:
+    						    facing = "Up";
+    						    break;
+    					    }
+                        }
+                        else {
                             ghost.setX(brick.getX() + brick.getDimension().width);
+    					    direction = rand.nextInt(3);
+    					    switch (direction) {
+    					    case 0:
+    						    facing = "Up";
+    						    break;
+    					    case 1:
+    						    facing = "Down";
+    						    break;
+    					    case 2:
+    						    facing = "Right";
+    						    break;
+    					    }
+                        }
                     }
                 }
             }
