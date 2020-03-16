@@ -1,6 +1,7 @@
 package Game.GameStates;
 
 import Display.UI.UIManager;
+import Game.PacMan.World.Map;
 import Game.PacMan.World.MapBuilder;
 import Game.PacMan.entities.Dynamics.BaseDynamic;
 import Game.PacMan.entities.Dynamics.PacMan;
@@ -19,10 +20,11 @@ public class PacManState extends State {
     private UIManager uiManager;
     public String Mode = "Intro";
     public int startCooldown = 60*4;//seven seconds for the music to finish
+    public int whatMap;
 
     public PacManState(Handler handler){
         super(handler);
-        handler.setMap(MapBuilder.createMap(Images.map1, handler));
+        handler.setMap(MapBuilder.createMap(Images.maps[2], handler));
 
     }
 
