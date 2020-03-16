@@ -19,7 +19,8 @@ public class Ghost extends BaseDynamic{
     public Animation leftAnim,rightAnim,upAnim,downAnim;
     public Random rand = new Random();
     int turnCooldown = 30, direction;
-
+// justSpawned makes sure it doesn't crawl back into the hole it came from.
+// direction is used to change the direction of the ghost when needed.
 
     public Ghost(int x, int y, int width, int height, Handler handler) {
         super(x, y, width, height, handler, Images.ghost);
@@ -58,25 +59,20 @@ public class Ghost extends BaseDynamic{
             turnCooldown--;
         }
         
-        /* Starts moving up, if hit boundblock, randomly check left or right first.
-         * moving left/right, randomly check up or down first. 
-         * if up/down || left/right not working, check the other direction
-         * 
-         */
 
-        if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP)  ||handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) && !turnFlag&& checkPreVerticalCollisions("Up")){
-            facing = "Up";
-            turnFlag = true;
-        }else if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) && !turnFlag&& checkPreHorizontalCollision("left")){
-            facing = "Left";
-            turnFlag = true;
-        }else if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)  || handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) && !turnFlag && checkPreHorizontalCollision("Right")){
-            facing = "Right";
-            turnFlag = true;
-        }else if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)  || handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) && !turnFlag&& checkPreVerticalCollisions("Down")){
-            facing = "Down";
-            turnFlag = true;
-        }
+//        if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP)  ||handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) && !turnFlag&& checkPreVerticalCollisions("Up")){
+//            facing = "Up";
+//            turnFlag = true;
+//        }else if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) && !turnFlag&& checkPreHorizontalCollision("Left")){
+//            facing = "Left";
+//            turnFlag = true;
+//        }else if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)  || handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) && !turnFlag && checkPreHorizontalCollision("Right")){
+//            facing = "Right";
+//            turnFlag = true;
+//        }else if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)  || handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) && !turnFlag&& checkPreVerticalCollisions("Down")){
+//            facing = "Down";
+//            turnFlag = true;
+//        }
 
         if (facing.equals("Right") || facing.equals("Left")){
             checkHorizontalCollision();
@@ -86,7 +82,7 @@ public class Ghost extends BaseDynamic{
 
     }
 
-
+    // I added code so that when colliding, change direction.
     public void checkVerticalCollisions() {
         Ghost ghost = this;
         ArrayList<BaseStatic> bricks = handler.getMap().getBlocksOnMap();
@@ -177,7 +173,7 @@ public class Ghost extends BaseDynamic{
     }
 
 
-
+    // I added code so that when colliding, change direction.
     public void checkHorizontalCollision(){
         Ghost ghost = this;
         ArrayList<BaseStatic> bricks = handler.getMap().getBlocksOnMap();
