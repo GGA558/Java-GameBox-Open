@@ -12,6 +12,7 @@ public class Dot extends BaseStatic{
 	
     public Dot(int x, int y, int width, int height, Handler handler) {
         super(x, y, width, height, handler, Images.pacmanDots[1]);
+        // Added 1/30 chance of fruit.
         this.fruitChance = rand.nextInt(30);
         if(fruitChance == 15) {
         	this.fruitSprite = rand.nextInt(5);

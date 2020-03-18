@@ -20,11 +20,11 @@ public class PacManState extends State {
     private UIManager uiManager;
     public String Mode = "Intro";
     public int startCooldown = 60*4;//seven seconds for the music to finish
-    public int whatMap;
+    public int whatMap = 0;
 
     public PacManState(Handler handler){
         super(handler);
-        handler.setMap(MapBuilder.createMap(Images.maps[2], handler));
+        handler.setMap(MapBuilder.createMap(Images.maps[0], handler));
 
     }
 
@@ -32,6 +32,18 @@ public class PacManState extends State {
     @Override
     public void tick() {
         if (Mode.equals("Stage")){
+//        	System.out.println(handler.getMap().getDots());
+        	if (handler.getMap().getDots() == 0) {
+        		whatMap++;
+        		if(whatMap == Images.maps.length) {
+        			whatMap = 0;
+        		}
+        		if(startCooldown <= 60*4) {
+                    handler.getMusicHandler().playEffect("pacman_beginning.wav");
+        		}
+                startCooldown = 60*5;
+                handler.setMap(MapBuilder.createMap(Images.maps[whatMap], handler));
+        	}
             if (startCooldown<=0) {
                 for (BaseDynamic entity : handler.getMap().getEnemiesOnMap()) {
                     entity.tick();

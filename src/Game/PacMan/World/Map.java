@@ -20,9 +20,10 @@ public class Map {
     Handler handler;
     private double bottomBorder;
     private Random rand;
-    private int mapBackground, toggle = 0;
-    private boolean isOn = true;
     // toggle and isOn are used to make the dots blink.
+    private int mapBackground, toggle = 0, dotAmount = 0;
+    private boolean isOn = true;
+
 
     public Map(Handler handler) {
         this.handler=handler;
@@ -44,8 +45,10 @@ public class Map {
     }
 
     public void drawMap(Graphics2D g2) {
+    	//Reset dotAmount.
+    	dotAmount = 0;
     	/*Every 12 ticks, flip the switch(isOn)
-    	 *I need to reset toggle eventually because ints have a finite ammount of numbers it can use.
+    	 *I need to reset toggle eventually because ints have a finite amount of numbers it can use.
     	 *toggle resets every 60 ticks.
     	 */
     	toggle++;
@@ -63,11 +66,11 @@ public class Map {
         			block.sprite = Resources.Images.pacmanDots[0];
 				}else {//Big Dot disappears
 					block.sprite = Resources.Images.pacmanDots[2];	
-				}
-			}if(block instanceof Dot){
+				}dotAmount++;
+			}if(block instanceof Dot){//Choose fruit sprite.
 				if(((Dot) block).fruitSprite != -1) {
 					block.sprite = Resources.Images.pacmanFruits[((Dot) block).fruitSprite];
-				}
+				}dotAmount++;
 			}
             g2.drawImage(block.sprite, block.x, block.y, block.width, block.height, null);
         }
@@ -124,5 +127,9 @@ public class Map {
     }
 
     public void reset() {
+    }
+    
+    public int getDots() {
+    	return dotAmount;
     }
 }
