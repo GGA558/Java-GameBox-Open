@@ -217,6 +217,7 @@ public class Images {
             pacmanDown[0] = pacmanSpriteSheet.crop(473,48,13,12);
             pacmanDown[1] = pacmanSpriteSheet.crop(489,1,13,13);
             
+            //Ghost animation sprites.
             blinkyRight[0] = pacmanSpriteSheet.crop(456, 64, 16, 16);
             blinkyRight[1] = pacmanSpriteSheet.crop(472, 64, 16, 16);
             pinkyRight[0] = pacmanSpriteSheet.crop(456, 80, 16, 16);
