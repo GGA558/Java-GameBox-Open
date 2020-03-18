@@ -64,7 +64,9 @@ public class PacManState extends State {
                             handler.getScoreManager().addPacmanCurrentScore(100);
 
                         }
-                    }
+                    }if (handler.getScoreManager().getPacmanCurrentScore() > handler.getScoreManager().getPacmanHighScore()) {
+                  	     handler.getScoreManager().setPacmanHighScore(handler.getScoreManager().getPacmanCurrentScore());
+           	        }
                 }
                 for (BaseStatic removing: toREmove){
                     handler.getMap().getBlocksOnMap().remove(removing);

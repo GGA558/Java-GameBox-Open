@@ -118,10 +118,6 @@ public class PacMan extends BaseDynamic{
         if(pacmanDies) {
             handler.getMap().reset();
         }
-        
-        if (handler.getScoreManager().getPacmanCurrentScore() > handler.getScoreManager().getPacmanHighScore()) {
-   	     handler.getScoreManager().setPacmanHighScore(handler.getScoreManager().getPacmanCurrentScore());
-   	        }
 
     }
 
