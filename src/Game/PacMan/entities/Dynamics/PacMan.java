@@ -12,12 +12,15 @@ import java.util.ArrayList;
 
 public class PacMan extends BaseDynamic{
 
-    protected double velX,velY,speed = 1;
+	public static int myOY1;
+	protected double velX,velY,speed = 1;
     public String facing = "Left";
     public boolean moving = true,turnFlag = false;
     public Animation leftAnim,rightAnim,upAnim,downAnim;
     int turnCooldown = 20;
     private int health = 3;
+    public int myOX;
+    public int myOY;
 
 
     public PacMan(int x, int y, int width, int height, Handler handler) {
@@ -27,6 +30,7 @@ public class PacMan extends BaseDynamic{
         upAnim = new Animation(128,Images.pacmanUp);
         downAnim = new Animation(128,Images.pacmanDown);
         this.health = health;
+
     }
 
     @Override
@@ -77,6 +81,12 @@ public class PacMan extends BaseDynamic{
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N) && health < 3) {
     	      health++;
         }
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_P)) {
+        	handler.getMap().reset();
+        	this.handler.getPacman().setX(myOX);
+        	this.handler.getPacman().setY(myOY);
+        	health --;
+        }
 
         if (facing.equals("Right") || facing.equals("Left")){
             checkHorizontalCollision();
@@ -113,6 +123,9 @@ public class PacMan extends BaseDynamic{
         for(BaseDynamic enemy : enemies){
             Rectangle enemyBounds = !toUp ? enemy.getTopBounds() : enemy.getBottomBounds();
             if (pacmanBounds.intersects(enemyBounds)) {
+            	this.handler.getPacman().setX(myOX);
+            	this.handler.getPacman().setY(myOY);
+            	health --;
                 pacmanDies = true;
                 break;
             }
@@ -162,6 +175,9 @@ public class PacMan extends BaseDynamic{
         for(BaseDynamic enemy : enemies){
             Rectangle enemyBounds = !toRight ? enemy.getRightBounds() : enemy.getLeftBounds();
             if (pacmanBounds.intersects(enemyBounds)) {
+            	this.handler.getPacman().setX(myOX);
+            	this.handler.getPacman().setY(myOY);
+            	health --;
                 pacmanDies = true;
                 break;
             }
