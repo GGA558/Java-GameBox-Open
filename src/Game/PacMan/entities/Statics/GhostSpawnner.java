@@ -31,6 +31,11 @@ public class GhostSpawnner extends BaseDynamic {
 				} else {
 					this.color = getAvailablePos();
 				}
+				if (spawnTime == 0) {
+					spawnTime = (rand.nextInt(9) + 1) * 60;
+				} else {
+					spawnTime--;
+				}
 			} else {
 				pos = this.getAvailablePos();
 				if (pos != -1) {
