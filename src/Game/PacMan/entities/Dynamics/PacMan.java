@@ -12,16 +12,16 @@ import java.util.ArrayList;
 
 public class PacMan extends BaseDynamic{
 
-	public static int myOY1;
 	protected double velX,velY,speed = 1;
     public String facing = "Left";
     public boolean moving = true,turnFlag = false;
     public Animation leftAnim,rightAnim,upAnim,downAnim;
     int turnCooldown = 20;
     private int health = 3;
+    // OX and OY for Original x and y.
     public int myOX;
     public int myOY;
-
+    
 
     public PacMan(int x, int y, int width, int height, Handler handler) {
         super(x, y, width, height, handler, Images.pacmanRight[0]);
@@ -30,7 +30,6 @@ public class PacMan extends BaseDynamic{
         upAnim = new Animation(128,Images.pacmanUp);
         downAnim = new Animation(128,Images.pacmanDown);
         this.health = health;
-
     }
 
     @Override
@@ -78,7 +77,8 @@ public class PacMan extends BaseDynamic{
             turnFlag = true;
             turnCooldown = 20;
         }
-        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N) && health < 3) {
+        //Health cap = 4
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N) && health < 4) {
     	      health++;
         }
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_P)) {
@@ -88,11 +88,16 @@ public class PacMan extends BaseDynamic{
         	health --;
         }
 
-        if (facing.equals("Right") || facing.equals("Left")){
-            checkHorizontalCollision();
-        }else{
-            checkVerticalCollisions();
-        }
+//        if (facing.equals("Right") || facing.equals("Left")){
+//            checkHorizontalCollision();
+//        }else{
+//            checkVerticalCollisions();
+//        }
+        /* There is an odd bug that makes pacman immortal if he hits a wall and stays still.
+         * By changing this code, that event happens much less often.
+         */
+        checkVerticalCollisions();
+        checkHorizontalCollision();
 
     }
 

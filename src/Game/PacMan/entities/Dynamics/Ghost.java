@@ -124,9 +124,9 @@ public class Ghost extends BaseDynamic {
 						case 1:
 							facing = "Left";
 							break;
-						case 2:
-							facing = "Down";
-							break;
+//						case 2:
+//							facing = "Down";
+//							break;
 						}
 					} else {
 						ghost.setY(brick.getY() - brick.getDimension().height);
@@ -139,9 +139,9 @@ public class Ghost extends BaseDynamic {
 						case 1:
 							facing = "Left";
 							break;
-						case 2:
-							facing = "Up";
-							break;
+//						case 2:
+//							facing = "Up";
+//							break;
 						}
 					}
 				}
@@ -222,9 +222,9 @@ public class Ghost extends BaseDynamic {
 							case 1:
 								facing = "Up";
 								break;
-							case 2:
-								facing = "Left";
-								break;
+//							case 2:
+//								facing = "Left";
+//								break;
 							}
 						} else {
 							ghost.setX(brick.getX() + brick.getDimension().width);
@@ -237,9 +237,9 @@ public class Ghost extends BaseDynamic {
 							case 1:
 								facing = "Down";
 								break;
-							case 2:
-								facing = "Right";
-								break;
+//							case 2:
+//								facing = "Right";
+//								break;
 							}
 						}
 					}

@@ -5,11 +5,11 @@ import Game.PacMan.World.Map;
 import Game.PacMan.World.MapBuilder;
 import Game.PacMan.entities.Dynamics.BaseDynamic;
 import Game.PacMan.entities.Dynamics.Ghost;
+import Game.PacMan.entities.Dynamics.GhostSpawnner;
 import Game.PacMan.entities.Dynamics.PacMan;
 import Game.PacMan.entities.Statics.BaseStatic;
 import Game.PacMan.entities.Statics.BigDot;
 import Game.PacMan.entities.Statics.Dot;
-import Game.PacMan.entities.Statics.GhostSpawnner;
 import Main.Handler;
 import Resources.Images;
 

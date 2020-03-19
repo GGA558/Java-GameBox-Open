@@ -1,17 +1,15 @@
-package Game.PacMan.entities.Statics;
+package Game.PacMan.entities.Dynamics;
 
 import java.util.Random;
 
 import Game.PacMan.World.MapBuilder;
-import Game.PacMan.entities.Dynamics.BaseDynamic;
-import Game.PacMan.entities.Dynamics.Ghost;
 import Main.Handler;
 import Resources.Images;
 
 //I misspelled Spawner, not going to change it, too many places to fix for something that won't break my code.
 public class GhostSpawnner extends BaseDynamic {
 
-	private int spawnTime = 0, color = 0;// 0. Red 1. Pink 2. Blue 3. Orange
+	private int spawnTime = 0, color = 0;// 0. Red   1. Blue   2. Pink   3. Orange
 	private Random rand = new Random();
 	private boolean[] colorAvailability;// true if occupied. List of available colors.
 
