@@ -7,6 +7,7 @@ import Game.PacMan.entities.Statics.BaseStatic;
 import Game.PacMan.entities.Statics.BigDot;
 import Game.PacMan.entities.Statics.BoundBlock;
 import Game.PacMan.entities.Statics.Dot;
+import Game.PacMan.entities.Statics.GhostSpawnner;
 import Main.Handler;
 import Resources.Images;
 
@@ -37,8 +38,8 @@ public class MapBuilder {
 					mapInCreation.addEnemy(PacMan);
 					handler.setPacman((Game.PacMan.entities.Dynamics.PacMan) PacMan);
 				}else if(currentPixel == ghostC){
-					BaseDynamic ghost = new Ghost(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
-					mapInCreation.addEnemy(ghost);
+					BaseDynamic spawnner = new GhostSpawnner(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
+					mapInCreation.addEnemy(spawnner);
 				}else if(currentPixel == dotC){
 					BaseStatic dot = new Dot(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(dot);

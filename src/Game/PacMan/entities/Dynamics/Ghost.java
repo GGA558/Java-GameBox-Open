@@ -18,16 +18,41 @@ public class Ghost extends BaseDynamic{
     public boolean moving = true,turnFlag = false,justSpawned = true;
     public Animation leftAnimG,rightAnimG,upAnimG,downAnimG;
     public Random rand = new Random();
-    int turnCooldown = 30, direction;
+    public int turnCooldown = 30, direction, color;
 // justSpawned makes sure it doesn't crawl back into the hole it came from.
 // direction is used to change the direction of the ghost when needed.
 
-    public Ghost(int x, int y, int width, int height, Handler handler) {
+    //Added the color parameter.
+    public Ghost(int x, int y, int width, int height, Handler handler, int color) {
         super(x, y, width, height, handler, Images.ghost);
-        leftAnimG = new Animation(128,Images.blinkyLeft);
-        rightAnimG = new Animation(128,Images.blinkyRight);
-        upAnimG = new Animation(128,Images.blinkyUp);
-        downAnimG = new Animation(128,Images.blinkyDown);
+        this.color = color;
+		switch (color) {
+		case 0://Red
+			leftAnimG = new Animation(128, Images.blinkyLeft);
+			rightAnimG = new Animation(128, Images.blinkyRight);
+			upAnimG = new Animation(128, Images.blinkyUp);
+			downAnimG = new Animation(128, Images.blinkyDown);
+			break;
+		case 1://Blue
+			leftAnimG = new Animation(128, Images.inkyLeft);
+			rightAnimG = new Animation(128, Images.inkyRight);
+			upAnimG = new Animation(128, Images.inkyUp);
+			downAnimG = new Animation(128, Images.inkyDown);
+			break;
+		case 2://Pink
+			leftAnimG = new Animation(128, Images.pinkyLeft);
+			rightAnimG = new Animation(128, Images.pinkyRight);
+			upAnimG = new Animation(128, Images.pinkyUp);
+			downAnimG = new Animation(128, Images.pinkyDown);
+			break;
+		case 3://Orange
+			leftAnimG = new Animation(128, Images.clydeLeft);
+			rightAnimG = new Animation(128, Images.clydeRight);
+			upAnimG = new Animation(128, Images.clydeUp);
+			downAnimG = new Animation(128, Images.clydeDown);
+			break;
+			
+        }
     }
 
     @Override
@@ -58,21 +83,6 @@ public class Ghost extends BaseDynamic{
         if (turnFlag){
             turnCooldown--;
         }
-        
-
-//        if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP)  ||handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) && !turnFlag&& checkPreVerticalCollisions("Up")){
-//            facing = "Up";
-//            turnFlag = true;
-//        }else if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) && !turnFlag&& checkPreHorizontalCollision("Left")){
-//            facing = "Left";
-//            turnFlag = true;
-//        }else if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)  || handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) && !turnFlag && checkPreHorizontalCollision("Right")){
-//            facing = "Right";
-//            turnFlag = true;
-//        }else if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)  || handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) && !turnFlag&& checkPreVerticalCollisions("Down")){
-//            facing = "Down";
-//            turnFlag = true;
-//        }
 
         if (facing.equals("Right") || facing.equals("Left")){
             checkHorizontalCollision();

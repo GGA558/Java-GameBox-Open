@@ -4,10 +4,12 @@ import Display.UI.UIManager;
 import Game.PacMan.World.Map;
 import Game.PacMan.World.MapBuilder;
 import Game.PacMan.entities.Dynamics.BaseDynamic;
+import Game.PacMan.entities.Dynamics.Ghost;
 import Game.PacMan.entities.Dynamics.PacMan;
 import Game.PacMan.entities.Statics.BaseStatic;
 import Game.PacMan.entities.Statics.BigDot;
 import Game.PacMan.entities.Statics.Dot;
+import Game.PacMan.entities.Statics.GhostSpawnner;
 import Main.Handler;
 import Resources.Images;
 
@@ -42,8 +44,19 @@ public class PacManState extends State {
                 handler.setMap(MapBuilder.createMap(Images.maps[level], handler));
         	}
             if (startCooldown<=0) {
+            	ArrayList<BaseDynamic> toREMove = new ArrayList<>();
+            	ArrayList<BaseDynamic> toAdd = new ArrayList<>();
                 for (BaseDynamic entity : handler.getMap().getEnemiesOnMap()) {
                     entity.tick();
+                    if (entity instanceof GhostSpawnner) {
+                    	if(((GhostSpawnner) entity).getSpawnTime() == 0) {
+                    		toAdd.add(new Ghost(entity.x, entity.y, MapBuilder.pixelMultiplier, MapBuilder.pixelMultiplier, handler, ((GhostSpawnner) entity).getColor()));
+                    	}
+                    }
+                    if (entity.getBounds().intersects(handler.getPacman().getBounds()) && entity instanceof Ghost){
+//                        handler.getMusicHandler().playEffect("pacman_chomp.wav");                        
+//                        toREMove.add(entity);
+                    }
                 }
                 ArrayList<BaseStatic> toREmove = new ArrayList<>();
                 for (BaseStatic blocks: handler.getMap().getBlocksOnMap()){
@@ -70,6 +83,14 @@ public class PacManState extends State {
                 }
                 for (BaseStatic removing: toREmove){
                     handler.getMap().getBlocksOnMap().remove(removing);
+                }
+                for (BaseDynamic Removing: toREMove){
+                    handler.getMap().getEnemiesOnMap().remove(Removing);
+                }
+                if (toAdd.size() > 0) {
+                	for(BaseDynamic thingToAdd: toAdd) {
+                		handler.getMap().getEnemiesOnMap().add(thingToAdd);
+                	}
                 }
             }else{
                 startCooldown--;
