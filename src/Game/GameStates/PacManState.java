@@ -40,7 +40,10 @@ public class PacManState extends State {
 				if (level == Images.maps.length) {
 					level = 0;
 				}
+				//tempHealth is used to make sure the health doesn't reset every level.
+				int tempHealth = handler.getPacman().getHealth();
 				handler.setMap(MapBuilder.createMap(Images.maps[level], handler));
+				handler.getPacman().setHealth(tempHealth);
 			}
 			if (startCooldown <= 0) {
 				ArrayList<BaseDynamic> toREMove = new ArrayList<>();

@@ -237,8 +237,8 @@ public class PacMan extends BaseDynamic{
     public int getHealth() {
     	return health;
     }
-    public int setHealth() {
-    	return health;
+    public void setHealth(int health) {
+    	this.health = health;
     }
 
 
