@@ -65,11 +65,12 @@ public class PacManState extends State {
 				for (BaseStatic blocks : handler.getMap().getBlocksOnMap()) {
 					if (blocks instanceof Dot) {
 						if (blocks.getBounds().intersects(handler.getPacman().getBounds())) {
-							handler.getMusicHandler().playEffect("pacman_chomp.wav");
 							toREmove.add(blocks);
 							if (((Dot) blocks).fruitSprite == -1) {
+								handler.getMusicHandler().playEffect("pacman_chomp.wav");
 								handler.getScoreManager().addPacmanCurrentScore(10);
 							} else {
+								handler.getMusicHandler().playEffect("pacman_eatfruit.wav");
 								handler.getScoreManager().addPacmanCurrentScore(120);
 							}
 						}
