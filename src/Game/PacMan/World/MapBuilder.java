@@ -8,6 +8,7 @@ import Game.PacMan.entities.Statics.BaseStatic;
 import Game.PacMan.entities.Statics.BigDot;
 import Game.PacMan.entities.Statics.BoundBlock;
 import Game.PacMan.entities.Statics.Dot;
+import Game.PacMan.entities.Statics.Teleporter;
 import Main.Handler;
 import Resources.Images;
 
@@ -22,6 +23,7 @@ public class MapBuilder {
 	public static int ghostC = new Color(25, 255,0).getRGB();
 	public static int dotC = new Color(255, 10, 0).getRGB();
 	public static int bigDotC = new Color(167, 0, 150).getRGB();
+	public static int teleporterC = new Color(0, 0, 255).getRGB();
 
 	public static Map createMap(BufferedImage mapImage, Handler handler){
 		Map mapInCreation = new Map(handler);
@@ -48,7 +50,16 @@ public class MapBuilder {
 				}else if(currentPixel == bigDotC){
 					BaseStatic bigDot = new BigDot(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 					mapInCreation.addBlock(bigDot);
+				}else if(currentPixel == teleporterC){
+					if(i == 0) {
+						BaseStatic teleporter = new Teleporter(xPos,yPos,pixelMultiplier,pixelMultiplier,handler, Images.bound[13]);
+						mapInCreation.addBlock(teleporter);			
+					}else {
+						BaseStatic teleporter = new Teleporter(xPos,yPos,pixelMultiplier,pixelMultiplier,handler, Images.bound[12]);
+						mapInCreation.addBlock(teleporter);			
+					}		
 				}
+					
 			}
 
 		}

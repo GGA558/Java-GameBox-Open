@@ -10,6 +10,7 @@ import Game.PacMan.entities.Dynamics.PacMan;
 import Game.PacMan.entities.Statics.BaseStatic;
 import Game.PacMan.entities.Statics.BigDot;
 import Game.PacMan.entities.Statics.Dot;
+import Game.PacMan.entities.Statics.Teleporter;
 import Main.Handler;
 import Resources.Images;
 
@@ -40,7 +41,7 @@ public class PacManState extends State {
 				if (level == Images.maps.length) {
 					level = 0;
 				}
-				//tempHealth is used to make sure the health doesn't reset every level.
+				// tempHealth is used to make sure the health doesn't reset every level.
 				int tempHealth = handler.getPacman().getHealth();
 				handler.setMap(MapBuilder.createMap(Images.maps[level], handler));
 				handler.getPacman().setHealth(tempHealth);
@@ -80,6 +81,14 @@ public class PacManState extends State {
 							toREmove.add(blocks);
 							handler.getScoreManager().addPacmanCurrentScore(100);
 
+						}
+					} else if (blocks instanceof Teleporter) {
+						if (blocks.getBounds().intersects(handler.getPacman().getBounds())) {
+							((Teleporter) blocks).teleportationSequence();
+						}
+						if (((Teleporter) blocks).boundsIntersectGhost() != null) {
+							((Teleporter) blocks)
+									.teleportationSequence((Ghost) ((Teleporter) blocks).boundsIntersectGhost());
 						}
 					}
 					if (handler.getScoreManager().getPacmanCurrentScore() > handler.getScoreManager()
