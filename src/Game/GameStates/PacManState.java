@@ -61,7 +61,10 @@ public class PacManState extends State {
 							toAdd.add(new Ghost(entity.x, entity.y, MapBuilder.pixelMultiplier,
 									MapBuilder.pixelMultiplier, handler, ((GhostSpawnner) entity).getColor()));
 						}
+						if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_C)){
+							toAdd.add(new Ghost(entity.x, entity.y, MapBuilder.pixelMultiplier, MapBuilder.pixelMultiplier, handler, ((GhostSpawnner) entity).getColor()));
 					}
+					}	
 					if (entity.getBounds().intersects(handler.getPacman().getBounds()) && entity instanceof Ghost) {
 //                        handler.getMusicHandler().playEffect("pacman_chomp.wav");                        
 //                        toREMove.add(entity);
