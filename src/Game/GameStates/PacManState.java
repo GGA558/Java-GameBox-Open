@@ -1,12 +1,10 @@
 package Game.GameStates;
 
 import Display.UI.UIManager;
-import Game.PacMan.World.Map;
 import Game.PacMan.World.MapBuilder;
 import Game.PacMan.entities.Dynamics.BaseDynamic;
 import Game.PacMan.entities.Dynamics.Ghost;
 import Game.PacMan.entities.Dynamics.GhostSpawnner;
-import Game.PacMan.entities.Dynamics.PacMan;
 import Game.PacMan.entities.Statics.BaseStatic;
 import Game.PacMan.entities.Statics.BigDot;
 import Game.PacMan.entities.Statics.Dot;
@@ -17,11 +15,13 @@ import Resources.Images;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class PacManState extends State {
 
 	private UIManager uiManager;
 	public String Mode = "Intro";
+	private Random rand = new Random();
 	public int startCooldown = 60 * 4;// seven seconds for the music to finish
 	public int level = 0;
 
@@ -60,9 +60,8 @@ public class PacManState extends State {
 						if (((GhostSpawnner) entity).getSpawnTime() == 0) {
 							toAdd.add(new Ghost(entity.x, entity.y, MapBuilder.pixelMultiplier,
 									MapBuilder.pixelMultiplier, handler, ((GhostSpawnner) entity).getColor()));
-						}
-						if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_C)){
-							toAdd.add(new Ghost(entity.x, entity.y, MapBuilder.pixelMultiplier, MapBuilder.pixelMultiplier, handler, ((GhostSpawnner) entity).getColor()));
+						}else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_C)){
+							toAdd.add(new Ghost(entity.x, entity.y, MapBuilder.pixelMultiplier, MapBuilder.pixelMultiplier, handler, rand.nextInt(4)));
 					}
 					}	
 					if (entity.getBounds().intersects(handler.getPacman().getBounds()) && entity instanceof Ghost) {
