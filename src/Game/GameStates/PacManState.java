@@ -33,6 +33,7 @@ public class PacManState extends State {
 
 	@Override
 	public void tick() {
+		pacmanEatGhostTime--;
 		if (Mode.equals("Stage")) {
 			// Added code to change level
 			if (handler.getMap().getDots() == 0) {

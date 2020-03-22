@@ -57,4 +57,8 @@ public class Animation {
         index =0;
         end = false;
     }
+    
+    public void setSpeed(int speed) {
+    	this.speed = speed;
+    }
 }

@@ -95,20 +95,34 @@ public class Map {
                         break;                    	
                 }
             }else if (entity instanceof Ghost) {
-                 switch (((Ghost) entity).facing){
-                    case "Right":
-                        g2.drawImage(((Ghost) entity).rightAnimG.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
-                        break;
-                    case "Left":
-                        g2.drawImage(((Ghost) entity).leftAnimG.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
-                        break;
-                    case "Up":
-                        g2.drawImage(((Ghost) entity).upAnimG.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
-                        break;
-                    case "Down":
-                        g2.drawImage(((Ghost) entity).downAnimG.getCurrentFrame(), entity.x, entity.y, entity.width, entity.height, null);
-                        break;
-                }
+				if (handler.getPacManState().pacmanEatGhostTime <= 0) {
+					switch (((Ghost) entity).facing) {
+					case "Right":
+						g2.drawImage(((Ghost) entity).rightAnimG.getCurrentFrame(), entity.x, entity.y, entity.width,
+								entity.height, null);
+						break;
+					case "Left":
+						g2.drawImage(((Ghost) entity).leftAnimG.getCurrentFrame(), entity.x, entity.y, entity.width,
+								entity.height, null);
+						break;
+					case "Up":
+						g2.drawImage(((Ghost) entity).upAnimG.getCurrentFrame(), entity.x, entity.y, entity.width,
+								entity.height, null);
+						break;
+					case "Down":
+						g2.drawImage(((Ghost) entity).downAnimG.getCurrentFrame(), entity.x, entity.y, entity.width,
+								entity.height, null);
+						break;
+					}
+				}else {
+					if(handler.getPacManState().pacmanEatGhostTime <= 180) {//3 seconds
+						((Ghost) entity).weakAnim.setSpeed(64);
+					}else {
+						((Ghost) entity).weakAnim.setSpeed(128);
+					}
+					g2.drawImage(((Ghost) entity).weakAnim.getCurrentFrame(), entity.x, entity.y, entity.width,
+							entity.height, null);
+				}
             }
             else {
                 g2.drawImage(entity.sprite, entity.x, entity.y, entity.width, entity.height, null);

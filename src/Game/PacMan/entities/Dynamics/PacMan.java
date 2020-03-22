@@ -144,7 +144,7 @@ public class PacMan extends BaseDynamic{
 
         for(BaseDynamic enemy : enemies){
             Rectangle enemyBounds = !toUp ? enemy.getTopBounds() : enemy.getBottomBounds();
-            if (pacmanBounds.intersects(enemyBounds)) {
+            if (pacmanBounds.intersects(enemyBounds) && handler.getPacManState().pacmanEatGhostTime <= 0) {
 //            	this.handler.getPacman().setX(myOX);
 //            	this.handler.getPacman().setY(myOY);
 //            	health --;
@@ -198,7 +198,7 @@ public class PacMan extends BaseDynamic{
 
         for(BaseDynamic enemy : enemies){
             Rectangle enemyBounds = !toRight ? enemy.getRightBounds() : enemy.getLeftBounds();
-            if (pacmanBounds.intersects(enemyBounds)) {
+            if (pacmanBounds.intersects(enemyBounds) && handler.getPacManState().pacmanEatGhostTime <= 0) {
 //            	this.handler.getPacman().setX(myOX);
 //            	this.handler.getPacman().setY(myOY);
 //            	health --;
