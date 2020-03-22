@@ -135,6 +135,7 @@ public class PacManState extends State {
 			}
 		} else if (Mode.equals("End")) {
 			if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
+				handler.setMap(MapBuilder.createMap(Images.maps[0], handler));
 				Mode = "Intro";
 				handler.getPacman().setHealth(3);
 				handler.getScoreManager().setPacmanCurrentScore(0);
