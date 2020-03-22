@@ -33,6 +33,11 @@ public class PacManState extends State {
 
 	@Override
 	public void tick() {
+		
+		if(handler.getPacman().getHealth() == 0) {
+			Mode = "End";	
+	    }
+		
 		if (Mode.equals("Stage")) {
 			// Added code to change level
 			if (handler.getMap().getDots() == 0) {
@@ -118,7 +123,15 @@ public class PacManState extends State {
 				Mode = "Stage";
 				handler.getMusicHandler().playEffect("pacman_beginning.wav");
 			}
-		} else {
+		} else if (Mode.equals("End")) {
+			if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
+				Mode = "Intro";
+				handler.getPacman().health = 3;
+				handler.getScoreManager().setPacmanCurrentScore(0);
+				startCooldown = 60 * 4 + 10;
+			}
+		} 
+		else {
 			if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
 				Mode = "Menu";
 			}
@@ -140,7 +153,17 @@ public class PacManState extends State {
 					(handler.getWidth() / 2) + handler.getWidth() / 6, 75);
 		} else if (Mode.equals("Menu")) {
 			g.drawImage(Images.start, 0, 0, handler.getWidth() / 2, handler.getHeight(), null);
-		} else {
+		} else if (Mode.equals("End")) {
+			//Graphics2D g2 = (Graphics2D) g.create();
+			//handler.getMap().drawMap(g2);
+			g.setColor(Color.RED);	
+			g.setFont(new Font("TimesRoman", Font.ITALIC, 46));
+			g.drawString("GAME OVER!",handler.getWidth()/3,handler.getHeight()/8);
+			g.drawString("YOUR SCORE: " + String.valueOf(handler.getScoreManager().getPacmanCurrentScore()),handler.getWidth()/3,handler.getHeight()/5);
+			g.drawString("HIGH SCORE: " + String.valueOf(handler.getScoreManager().getPacmanHighScore()),handler.getWidth()/3,handler.getHeight()/3);
+			g.drawString("PRESS 'ENTER' TO TRY AGAIN!",handler.getWidth()/3,handler.getHeight()/2);	
+		}  
+		else {
 			g.drawImage(Images.intro, 0, 0, handler.getWidth() / 2, handler.getHeight(), null);
 
 		}

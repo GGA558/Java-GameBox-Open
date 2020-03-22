@@ -18,7 +18,7 @@ public class PacMan extends BaseDynamic{
     public boolean moving = true,turnFlag = false;
     public Animation leftAnim,rightAnim,upAnim,downAnim;
     int turnCooldown = 20;
-    private int health = 3;
+    public int health = 3;
     // OX and OY for Original x and y.
     public int myOX;
     public int myOY;
