@@ -46,6 +46,10 @@ public class PacManState extends State {
 				handler.setMap(MapBuilder.createMap(Images.maps[level], handler));
 				handler.getPacman().setHealth(tempHealth);
 			}
+			if (handler.getPacman().deathAnim.end) {
+				handler.getPacman().deathAnim.reset();
+				startCooldown = 60 * 5;
+			}
 			if (startCooldown <= 0) {
 				ArrayList<BaseDynamic> toREMove = new ArrayList<>();
 				ArrayList<BaseDynamic> toAdd = new ArrayList<>();

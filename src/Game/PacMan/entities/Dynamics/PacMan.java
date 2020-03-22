@@ -15,9 +15,9 @@ public class PacMan extends BaseDynamic{
 
 	protected double velX,velY,speed = 1;
     public String facing = "Left";
-    public boolean moving = true,turnFlag = false;
-    public Animation leftAnim,rightAnim,upAnim,downAnim;
-    int turnCooldown = 20;
+    public boolean moving = true,turnFlag = false, justDied = false;
+    public Animation leftAnim,rightAnim,upAnim,downAnim,deathAnim;
+    int turnCooldown = 20, deathCooldown = 0;
     private int health = 3;
     // OX and OY for Original x and y.
     public int myOX;
@@ -30,6 +30,7 @@ public class PacMan extends BaseDynamic{
         rightAnim = new Animation(128,Images.pacmanRight);
         upAnim = new Animation(128,Images.pacmanUp);
         downAnim = new Animation(128,Images.pacmanDown);
+        deathAnim = new Animation(128, Images.pacmanDeath);
         this.health = health;
     }
 
@@ -53,6 +54,22 @@ public class PacMan extends BaseDynamic{
                 y+=velY;
                 downAnim.tick();
                 break;
+            case "Dead":
+            	deathAnim.tick();
+            	deathCooldown--;
+            	if(deathAnim.end) {
+            		health--;
+                	this.handler.getPacman().setX(myOX);
+                	this.handler.getPacman().setY(myOY);
+                	facing = "Left";
+            	}else if (justDied && deathCooldown <= 0) {
+                	handler.getMusicHandler().playEffect("pacman_death.wav");
+                	justDied = false;
+                	deathCooldown = 60;
+            	}else if (justDied) {
+                	justDied = false;
+            	}
+            	break;
         }
         if (turnCooldown<=0){
             turnFlag= false;
@@ -61,19 +78,19 @@ public class PacMan extends BaseDynamic{
             turnCooldown--;
         }
 
-        if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)  || handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) && !turnFlag && checkPreHorizontalCollision("Right")){
+        if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) && !turnFlag && checkPreHorizontalCollision("Right") && facing != "Dead"){
             facing = "Right";
             turnFlag = true;
             turnCooldown = 20;
-        }else if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) && !turnFlag&& checkPreHorizontalCollision("left")){
+        }else if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) && !turnFlag&& checkPreHorizontalCollision("left") && facing != "Dead"){
             facing = "Left";
             turnFlag = true;
             turnCooldown = 20;
-        }else if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP)  ||handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) && !turnFlag&& checkPreVerticalCollisions("Up")){
+        }else if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) && !turnFlag&& checkPreVerticalCollisions("Up") && facing != "Dead"){
             facing = "Up";
             turnFlag = true;
             turnCooldown = 20;
-        }else if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)  || handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) && !turnFlag&& checkPreVerticalCollisions("Down")){
+        }else if ((handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) && !turnFlag&& checkPreVerticalCollisions("Down") && facing != "Dead"){
             facing = "Down";
             turnFlag = true;
             turnCooldown = 20;
@@ -84,9 +101,8 @@ public class PacMan extends BaseDynamic{
         }
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_P)) {
         	handler.getMap().reset();
-        	this.handler.getPacman().setX(myOX);
-        	this.handler.getPacman().setY(myOY);
-        	health --;
+        	facing = "Dead";
+        	handler.getMusicHandler().playEffect("pacman_death.wav");
         }
 
 //        if (facing.equals("Right") || facing.equals("Left")){
@@ -129,15 +145,17 @@ public class PacMan extends BaseDynamic{
         for(BaseDynamic enemy : enemies){
             Rectangle enemyBounds = !toUp ? enemy.getTopBounds() : enemy.getBottomBounds();
             if (pacmanBounds.intersects(enemyBounds)) {
-            	this.handler.getPacman().setX(myOX);
-            	this.handler.getPacman().setY(myOY);
-            	health --;
+//            	this.handler.getPacman().setX(myOX);
+//            	this.handler.getPacman().setY(myOY);
+//            	health --;
                 pacmanDies = true;
                 break;
             }
         }
 
         if(pacmanDies) {
+        	facing = "Dead";
+        	justDied = true;
             handler.getMap().reset();
         }
 
@@ -181,15 +199,17 @@ public class PacMan extends BaseDynamic{
         for(BaseDynamic enemy : enemies){
             Rectangle enemyBounds = !toRight ? enemy.getRightBounds() : enemy.getLeftBounds();
             if (pacmanBounds.intersects(enemyBounds)) {
-            	this.handler.getPacman().setX(myOX);
-            	this.handler.getPacman().setY(myOY);
-            	health --;
+//            	this.handler.getPacman().setX(myOX);
+//            	this.handler.getPacman().setY(myOY);
+//            	health --;
                 pacmanDies = true;
                 break;
             }
         }
 
         if(pacmanDies) {
+          	facing = "Dead";
+          	justDied = true;
             handler.getMap().reset();
         }else {
 

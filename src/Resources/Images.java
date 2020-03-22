@@ -35,6 +35,7 @@ public class Images {
     public static BufferedImage[] pacmanLeft;
     public static BufferedImage[] pacmanUp;
     public static BufferedImage[] pacmanDown;
+    public static BufferedImage[] pacmanDeath;
     public static BufferedImage[] blinkyRight;
     public static BufferedImage[] blinkyLeft;
     public static BufferedImage[] blinkyUp;
@@ -84,6 +85,7 @@ public class Images {
         pacmanLeft = new BufferedImage[2];
         pacmanUp = new BufferedImage[2];
         pacmanDown = new BufferedImage[2];
+        pacmanDeath = new BufferedImage[12];
         blinkyRight = new BufferedImage[2];
         blinkyLeft = new BufferedImage[2];
         blinkyUp = new BufferedImage[2];
@@ -216,6 +218,20 @@ public class Images {
 
             pacmanDown[0] = pacmanSpriteSheet.crop(473,48,13,12);
             pacmanDown[1] = pacmanSpriteSheet.crop(489,1,13,13);
+            
+            //Pacman Death Animation sprites.
+            pacmanDeath[0] = pacmanSpriteSheet.crop(488,0,15,15);
+            pacmanDeath[1] = pacmanSpriteSheet.crop(504,0,15,13);
+            pacmanDeath[2] = pacmanSpriteSheet.crop(520,0,15,13);
+            pacmanDeath[3] = pacmanSpriteSheet.crop(536,0,15,13);
+            pacmanDeath[4] = pacmanSpriteSheet.crop(552,0,15,13);
+            pacmanDeath[5] = pacmanSpriteSheet.crop(568,0,15,13);
+            pacmanDeath[6] = pacmanSpriteSheet.crop(584,0,15,13);
+            pacmanDeath[7] = pacmanSpriteSheet.crop(600,0,15,13);
+            pacmanDeath[8] = pacmanSpriteSheet.crop(616,0,15,13);
+            pacmanDeath[9] = pacmanSpriteSheet.crop(632,0,15,13);
+            pacmanDeath[10] = pacmanSpriteSheet.crop(648,0,15,13);
+            pacmanDeath[11] = pacmanSpriteSheet.crop(664,0,15,13);
             
             //Ghost animation sprites.
             blinkyRight[0] = pacmanSpriteSheet.crop(456, 64, 16, 16);
