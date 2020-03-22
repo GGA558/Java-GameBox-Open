@@ -36,6 +36,7 @@ public class Images {
     public static BufferedImage[] pacmanUp;
     public static BufferedImage[] pacmanDown;
     public static BufferedImage[] pacmanDeath;
+    public static BufferedImage[] weakGhost;
     public static BufferedImage[] blinkyRight;
     public static BufferedImage[] blinkyLeft;
     public static BufferedImage[] blinkyUp;
@@ -86,6 +87,7 @@ public class Images {
         pacmanUp = new BufferedImage[2];
         pacmanDown = new BufferedImage[2];
         pacmanDeath = new BufferedImage[12];
+        weakGhost = new BufferedImage[4];
         blinkyRight = new BufferedImage[2];
         blinkyLeft = new BufferedImage[2];
         blinkyUp = new BufferedImage[2];
@@ -232,6 +234,12 @@ public class Images {
             pacmanDeath[9] = pacmanSpriteSheet.crop(632,0,15,13);
             pacmanDeath[10] = pacmanSpriteSheet.crop(648,0,15,13);
             pacmanDeath[11] = pacmanSpriteSheet.crop(664,0,15,13);
+            
+            //Blue-cyan ghost sprites
+            weakGhost[0] = pacmanSpriteSheet.crop(584, 64, 16, 16);
+            weakGhost[1] = pacmanSpriteSheet.crop(600, 64, 16, 16);
+            weakGhost[2] = pacmanSpriteSheet.crop(616, 64, 16, 16);
+            weakGhost[3] = pacmanSpriteSheet.crop(632, 64, 16, 16);
             
             //Ghost animation sprites.
             blinkyRight[0] = pacmanSpriteSheet.crop(456, 64, 16, 16);

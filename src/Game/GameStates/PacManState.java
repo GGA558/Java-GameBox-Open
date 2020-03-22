@@ -23,7 +23,7 @@ public class PacManState extends State {
 	private UIManager uiManager;
 	public String Mode = "Intro";
 	public int startCooldown = 60 * 4;// seven seconds for the music to finish
-	public int level = 0;
+	public int level = 0, pacmanEatGhostTime = 0;
 
 	public PacManState(Handler handler) {
 		super(handler);
@@ -62,8 +62,11 @@ public class PacManState extends State {
 						}
 					}
 					if (entity.getBounds().intersects(handler.getPacman().getBounds()) && entity instanceof Ghost) {
-//                        handler.getMusicHandler().playEffect("pacman_chomp.wav");                        
-//                        toREMove.add(entity);
+						if (pacmanEatGhostTime > 0) {
+							handler.getMusicHandler().playEffect("pacman_eatghost.wav");
+							handler.getScoreManager().addPacmanCurrentScore(500);
+							toREMove.add(entity);
+						}
 					}
 				}
 				ArrayList<BaseStatic> toREmove = new ArrayList<>();
@@ -82,6 +85,7 @@ public class PacManState extends State {
 					} else if (blocks instanceof BigDot) {
 						if (blocks.getBounds().intersects(handler.getPacman().getBounds())) {
 							handler.getMusicHandler().playEffect("pacman_chomp.wav");
+							pacmanEatGhostTime = 600;// Ten seconds for pacman to eat ghosts.
 							toREmove.add(blocks);
 							handler.getScoreManager().addPacmanCurrentScore(100);
 

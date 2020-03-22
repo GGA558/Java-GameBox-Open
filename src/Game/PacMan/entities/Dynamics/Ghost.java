@@ -17,7 +17,7 @@ public class Ghost extends BaseDynamic {
 	protected double velX, velY, speed = 1;
 	public String facing = "Up";
 	public boolean moving = true, turnFlag = false, justSpawned = true;
-	public Animation leftAnimG, rightAnimG, upAnimG, downAnimG;
+	public Animation leftAnimG, rightAnimG, upAnimG, downAnimG, weakAnim;
 	public Random rand = new Random();
 	public int turnCooldown = 30, direction, color;
 // justSpawned makes sure it doesn't crawl back into the hole it came from.
@@ -52,8 +52,8 @@ public class Ghost extends BaseDynamic {
 			upAnimG = new Animation(128, Images.clydeUp);
 			downAnimG = new Animation(128, Images.clydeDown);
 			break;
-
 		}
+		weakAnim = new Animation(128, Images.weakGhost);
 	}
 
 	@Override
@@ -61,20 +61,36 @@ public class Ghost extends BaseDynamic {
 
 		switch (facing) {
 		case "Right":
+			if (handler.getPacManState().pacmanEatGhostTime > 0) {
+				weakAnim.tick();
+			} else {
+				rightAnimG.tick();
+			}
 			x += velX;
-			rightAnimG.tick();
 			break;
 		case "Left":
+			if (handler.getPacManState().pacmanEatGhostTime > 0) {
+				weakAnim.tick();
+			} else {
+				leftAnimG.tick();
+			}
 			x -= velX;
-			leftAnimG.tick();
 			break;
 		case "Up":
+			if (handler.getPacManState().pacmanEatGhostTime > 0) {
+				weakAnim.tick();
+			} else {
+				upAnimG.tick();
+			}
 			y -= velY;
-			upAnimG.tick();
 			break;
 		case "Down":
+			if (handler.getPacManState().pacmanEatGhostTime > 0) {
+				weakAnim.tick();
+			} else {
+				downAnimG.tick();
+			}
 			y += velY;
-			downAnimG.tick();
 			break;
 		}
 		if (turnCooldown <= 0) {
