@@ -60,10 +60,11 @@ public class PacManState extends State {
 						if (((GhostSpawnner) entity).getSpawnTime() == 0) {
 							toAdd.add(new Ghost(entity.x, entity.y, MapBuilder.pixelMultiplier,
 									MapBuilder.pixelMultiplier, handler, ((GhostSpawnner) entity).getColor()));
-						}else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_C)){
-							toAdd.add(new Ghost(entity.x, entity.y, MapBuilder.pixelMultiplier, MapBuilder.pixelMultiplier, handler, rand.nextInt(4)));
+						} else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_C)) {
+							toAdd.add(new Ghost(entity.x, entity.y, MapBuilder.pixelMultiplier,
+									MapBuilder.pixelMultiplier, handler, rand.nextInt(4)));
+						}
 					}
-					}	
 					if (entity.getBounds().intersects(handler.getPacman().getBounds()) && entity instanceof Ghost) {
 //                        handler.getMusicHandler().playEffect("pacman_chomp.wav");                        
 //                        toREMove.add(entity);
@@ -130,7 +131,7 @@ public class PacManState extends State {
 				Mode = "Intro";
 				handler.getPacman().health = 3;
 				handler.getScoreManager().setPacmanCurrentScore(0);
-				startCooldown = 60 * 4 + 10;
+				startCooldown = 60 * 4;
 			}
 		} 
 		else {
