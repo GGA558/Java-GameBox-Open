@@ -31,7 +31,6 @@ public class PacMan extends BaseDynamic{
         upAnim = new Animation(128,Images.pacmanUp);
         downAnim = new Animation(128,Images.pacmanDown);
         deathAnim = new Animation(128, Images.pacmanDeath);
-        this.health = health;
     }
 
     @Override
@@ -145,9 +144,6 @@ public class PacMan extends BaseDynamic{
         for(BaseDynamic enemy : enemies){
             Rectangle enemyBounds = !toUp ? enemy.getTopBounds() : enemy.getBottomBounds();
             if (pacmanBounds.intersects(enemyBounds) && handler.getPacManState().pacmanEatGhostTime <= 0) {
-//            	this.handler.getPacman().setX(myOX);
-//            	this.handler.getPacman().setY(myOY);
-//            	health --;
                 pacmanDies = true;
                 break;
             }
@@ -199,9 +195,6 @@ public class PacMan extends BaseDynamic{
         for(BaseDynamic enemy : enemies){
             Rectangle enemyBounds = !toRight ? enemy.getRightBounds() : enemy.getLeftBounds();
             if (pacmanBounds.intersects(enemyBounds) && handler.getPacManState().pacmanEatGhostTime <= 0) {
-//            	this.handler.getPacman().setX(myOX);
-//            	this.handler.getPacman().setY(myOY);
-//            	health --;
                 pacmanDies = true;
                 break;
             }

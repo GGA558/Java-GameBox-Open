@@ -24,6 +24,7 @@ public class PacManState extends State {
 	private Random rand = new Random();
 	public int startCooldown = 60 * 4;// seven seconds for the music to finish
 	public int level = 0, pacmanEatGhostTime = 0;
+	public boolean oneTimeLife = true;
 
 	public PacManState(Handler handler) {
 		super(handler);
@@ -109,6 +110,9 @@ public class PacManState extends State {
 					if (handler.getScoreManager().getPacmanCurrentScore() > handler.getScoreManager()
 							.getPacmanHighScore()) {
 						handler.getScoreManager().setPacmanHighScore(handler.getScoreManager().getPacmanCurrentScore());
+					}if (handler.getScoreManager().getPacmanCurrentScore() >= 10000 && oneTimeLife && handler.getPacman().getHealth() < 4) {
+						handler.getPacman().setHealth(handler.getPacman().getHealth() + 1);
+						oneTimeLife = false;
 					}
 				}
 				for (BaseStatic removing : toREmove) {
