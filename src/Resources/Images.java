@@ -17,6 +17,7 @@ public class Images {
     public static BufferedImage galagaSelect;
     public static BufferedImage muteIcon;
     public static BufferedImage galagaPlayerLaser;
+    public static BufferedImage galagaEnemyLaser;
     public static BufferedImage[] startGameButton;
     public static BufferedImage[] galagaLogo;
     public static BufferedImage[] pauseResumeButton;
@@ -26,6 +27,7 @@ public class Images {
     public static BufferedImage[] galagaPlayerDeath;
     public static BufferedImage[] galagaEnemyDeath;
     public static BufferedImage[] galagaEnemyBee;
+    public static BufferedImage[] galagaEnemyShip;
 
     public static BufferedImage[] maps;
     public static BufferedImage[] officialPacLogo;
@@ -78,6 +80,7 @@ public class Images {
         galagaPlayerDeath = new BufferedImage[8];
         galagaEnemyDeath = new BufferedImage[5];
         galagaEnemyBee = new BufferedImage[8];
+        galagaEnemyShip = new BufferedImage[2];
 
         maps = new BufferedImage[3];
         pacmanDots = new BufferedImage[3];
@@ -173,7 +176,16 @@ public class Images {
             galagaEnemyBee[7] = galagaSpriteSheet.crop(19,177,10,13);
 
 
-            galagaPlayerLaser = galagaSpriteSheet.crop(365 ,219,3,8);
+            galagaPlayerLaser = galagaSpriteSheet.crop(365,219,3,8);
+
+            galagaEnemyShip[0] = galagaSpriteSheet.crop(160,320,16,16);
+            galagaEnemyShip[1] = galagaSpriteSheet.crop(160,320,16,16);
+//            galagaEnemyShip[2] = galagaSpriteSheet.crop(139,177,11,130);
+//            galagaEnemyShip[3] = galagaSpriteSheet.crop(139,176,14,130);
+//            galagaEnemyShip[4] = galagaSpriteSheet.crop(113,177,13,131);
+            
+            //new sprite for enemy laser.
+            galagaEnemyLaser = galagaSpriteSheet.crop(373,51,5,9);
 
             pacmanImageSheet = ImageIO.read(getClass().getResourceAsStream("/UI/SpriteSheets/PacMan/Background.png"));
             pacmanSpriteSheet = new SpriteSheet(pacmanImageSheet);

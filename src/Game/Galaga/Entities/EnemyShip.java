@@ -1,50 +1,47 @@
 package Game.Galaga.Entities;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+
 import Main.Handler;
 import Resources.Animation;
 import Resources.Images;
-import Resources.ScoreManager;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-
-
-public class EnemyBee extends BaseEntity {
+public class EnemyShip extends BaseEntity {
 	int row,col;//row 3-4, col 0-7
-    boolean justSpawned=true,attacking=false, positioned=false,hit=false,centered = false, noAddScore = false;
+    boolean justSpawned=true,attacking=false, positioned=false,hit=false,centered = false,noAddScore = false;
     Animation idle,turn90Left;
     int spawnPos;//0 is left 1 is top, 2 is right, 3 is bottom
     int formationX,formationY,speed,centerCoolDown=60;
     int timeAlive=0;
-    int BeeScore=100;
-	int TimePos=60*random.nextInt(12), spinCounter = 0;
-	int[] attackPattern = new int[3];
+    int ShipScore=150;
+	int TimePos=60*random.nextInt(5)+60;
   
     
-    public EnemyBee(int x, int y, int width, int height, Handler handler,int row, int col, EntityManager enemies) {
-        super(x, y, width, height, Images.galagaEnemyBee[0], handler);
+    public EnemyShip(int x, int y, int width, int height, Handler handler,int row, int col, EntityManager enemies) {
+        super(x, y, width, height, Images.galagaEnemyShip[0], handler);
         
-//        row=random.nextInt(2)+2;
-//        col=random.nextInt(8);
+//        row=random.nextInt(2);
+//        col=random.nextInt(6)+1;
         this.row = row;
         this.col = col;
-        attackPattern[0] = random.nextInt(2);
-        spinCounter = 2;
         
         
         BufferedImage[] idleAnimList= new BufferedImage[2];
-        idleAnimList[0] = Images.galagaEnemyBee[0];
-        idleAnimList[1] = Images.galagaEnemyBee[1];
+        idleAnimList[0] = Images.galagaEnemyShip[0];
+        idleAnimList[1] = Images.galagaEnemyShip[1];
         idle = new Animation(512,idleAnimList);
-        turn90Left = new Animation(128,Images.galagaEnemyBee);
+        turn90Left = new Animation(128,Images.galagaEnemyShip);
         spawn();
         speed = 4;
         formationX=(handler.getWidth()/4)+(col*((handler.getWidth()/2)/8))+8;
         formationY=(row*(handler.getHeight()/10))+8;
     }
 
-    public void spawn() {
+    private void spawn() {
         spawnPos = random.nextInt(3);
         switch (spawnPos){
             case 0://left
@@ -75,11 +72,11 @@ public class EnemyBee extends BaseEntity {
         if (hit){
             if (enemyDeath.end){
             	if(!noAddScore) {
-            	    handler.getScoreManager().addGalagaCurrentScore(BeeScore);
+            	    handler.getScoreManager().addGalagaCurrentScore(ShipScore);
             	    if(handler.getScoreManager().getGalagaCurrentScore()>handler.getScoreManager().getGalagaHighScore()) {
             		    handler.getScoreManager().setGalagaHighScore(handler.getScoreManager().getGalagaCurrentScore());
-            	    }  
-            	}
+            	    }
+            	}           	
             	remove = true;
                 return;
                 
@@ -166,10 +163,6 @@ public class EnemyBee extends BaseEntity {
                 }else{
                     centerCoolDown--;
                 }
-                if(!justSpawned && !positioned && !attacking) {
-                	damage(new PlayerLaser(0,0,0,0,Images.galagaPlayerLaser,handler,handler.getGalagaState().entityManager));
-                
-                }
                 if (timeAlive>=60*60*2){
                     //more than 2 minutes in this state then die
                     //60 ticks in a second, times 60 is a minute, times 2 is a minute
@@ -186,74 +179,22 @@ public class EnemyBee extends BaseEntity {
         	
         	
         }else if (attacking){  
-        	if(x == handler.getGalagaState().entityManager.playerShip.x || attackPattern[1] == 3) {
-        		attackPattern[1] = 3;
-        		attackPattern[2] = 1;
-        		switch(attackPattern[2]) {
-        		case 0:
-        			x+=speed;
-        			spinCounter--;
-        			if (spinCounter <= 0) {
-        				attackPattern[2] = 1;
-        				spinCounter = 2;
-        			}
-        			break;
-        		case 1:
-        			y-=speed;
-        			spinCounter--;
-        			if (spinCounter <= 0) {
-        				attackPattern[2] = 2;
-        				spinCounter = 2;
-        			}
-        			break;
-        		case 2:
-        			x-=speed;
-        			spinCounter--;
-        			if (spinCounter <= 0) {
-        				attackPattern[2] = 3;
-        				spinCounter = 2;
-        			}
-        			break;
-        		case 3:
-        			y+=speed;
-        			break;
-        		}
-            }
-        	else if(x <= handler.getWidth()/4+2 || attackPattern[1] == 2) {
-        		attackPattern[1] = 2; 
-        	    y+=speed;
-        	    x+=speed/6 * 5;
-        	    if(x == (handler.getWidth()-handler.getWidth()/4-63)) {
-        	    	attackPattern[1] = 1; 
-        	    }
-        	}else if(x >= (handler.getWidth()-handler.getWidth()/4-63) || attackPattern[1] == 1) {
-        		attackPattern[1] = 1; 
-        		y+=speed;
-        		x-=speed/6 * 5;
-        		if(x == handler.getWidth()/4) {
-        			attackPattern[1] = 2;
-        		}
-        	}else {
-        		switch(attackPattern[0]) {
-        		case 0:
-        			y+=speed;
-        			x+=speed;
-        			break;
-        		case 1:
-        			y+=speed;
-        			x-=speed;
-        			break;
-        		}
-        	}
+        		handler.getMusicHandler().playEffect("laser.wav");
+        		handler.getGalagaState().entityManager.enemyentities.add(new EnemyLaser(x + (width / 2), y + 3, width / 5, height / 2, Images.galagaEnemyLaser, handler, handler.getGalagaState().entityManager));
+        		TimePos=random.nextInt(5)*60+60;
+        		positioned=true;
+        		attacking = false;    	
+        		
         	
-       	
-        	// kills enemy bee if out of screen.
-        }if (centered || !centered) {
-        	if(this.y > handler.getHeight()|| this.x < handler.getWidth()/5 || this.x > handler.getWidth()*4/5 ) {
-        		noAddScore = true;
-        		damage(new PlayerLaser(0,0,0,0,Images.galagaPlayerLaser,handler,handler.getGalagaState().entityManager));
-        	}
         }
+        
+        // kills enemy Ship if out of screen.
+    if (centered || !centered) {
+    	if(this.y > handler.getHeight()|| this.x < handler.getWidth()/5 || this.x > handler.getWidth()*4/5 ) {
+    		noAddScore = true;
+    		damage(new PlayerLaser(0,0,0,0,Images.galagaPlayerLaser,handler,handler.getGalagaState().entityManager));
+    	}
+    }
         
         bounds.x=x;
         bounds.y=y;  
