@@ -9,8 +9,8 @@ import Resources.Images;
 
 public class Teleporter extends BaseStatic {
 
-	public Teleporter(int x, int y, int width, int height, Handler handler, BufferedImage sprite) {
-		super(x, y, width, height, handler, sprite);
+	public Teleporter(int x, int y, int width, int height, Handler handler) {
+		super(x, y, width, height, handler, Images.pacmanDots[2]);
 	}
 
 	public void teleportationSequence() {

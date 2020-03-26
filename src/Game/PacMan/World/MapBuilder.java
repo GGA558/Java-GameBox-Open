@@ -52,10 +52,10 @@ public class MapBuilder {
 					mapInCreation.addBlock(bigDot);
 				}else if(currentPixel == teleporterC){
 					if(i == 0) {
-						BaseStatic teleporter = new Teleporter(xPos,yPos,pixelMultiplier,pixelMultiplier,handler, Images.bound[13]);
+						BaseStatic teleporter = new Teleporter(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 						mapInCreation.addBlock(teleporter);			
 					}else {
-						BaseStatic teleporter = new Teleporter(xPos,yPos,pixelMultiplier,pixelMultiplier,handler, Images.bound[12]);
+						BaseStatic teleporter = new Teleporter(xPos,yPos,pixelMultiplier,pixelMultiplier,handler);
 						mapInCreation.addBlock(teleporter);			
 					}		
 				}

@@ -82,7 +82,7 @@ public class Images {
         galagaEnemyBee = new BufferedImage[8];
         galagaEnemyShip = new BufferedImage[2];
 
-        maps = new BufferedImage[3];
+        maps = new BufferedImage[4];
         pacmanDots = new BufferedImage[3];
         pacmanFruits = new BufferedImage[5];
         pacmanRight = new BufferedImage[2];
@@ -189,9 +189,13 @@ public class Images {
 
             pacmanImageSheet = ImageIO.read(getClass().getResourceAsStream("/UI/SpriteSheets/PacMan/Background.png"));
             pacmanSpriteSheet = new SpriteSheet(pacmanImageSheet);
+            
+            //Level maps
             maps[0] = ImageIO.read(getClass().getResourceAsStream("/UI/Backgrounds/PacManMaps/map1.png"));
-            maps[1] = ImageIO.read(getClass().getResourceAsStream("/UI/Backgrounds/PacManMaps/map2.png"));
-            maps[2] = ImageIO.read(getClass().getResourceAsStream("/UI/Backgrounds/PacManMaps/map3.png"));
+            maps[1] = ImageIO.read(getClass().getResourceAsStream("/UI/Backgrounds/PacManMaps/map4.png"));
+            maps[2] = ImageIO.read(getClass().getResourceAsStream("/UI/Backgrounds/PacManMaps/map2.png"));
+            maps[3] = ImageIO.read(getClass().getResourceAsStream("/UI/Backgrounds/PacManMaps/map3.png"));
+            
             ghost = pacmanSpriteSheet.crop(456,64,16,16);
             pacmanDots[0] = pacmanSpriteSheet.crop(643,18,16,16);
             pacmanDots[1] = pacmanSpriteSheet.crop(623,18,16,16);

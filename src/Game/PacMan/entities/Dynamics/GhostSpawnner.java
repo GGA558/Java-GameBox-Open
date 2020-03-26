@@ -21,13 +21,13 @@ public class GhostSpawnner extends BaseDynamic {
 		int pos;
 		colorAvailability = new boolean[4];
 		setAvailability();
-		if (handler.getMap().getEnemiesOnMap().size() < 4 * (handler.getPacManState().level + 1) + 2) {
-			if (handler.getPacManState().level > 0) {
+		if (handler.getMap().getEnemiesOnMap().size() < this.ghostLimit(handler.getPacManState().level) + 2) {
+			if (handler.getPacManState().level > 1) {
 				pos = rand.nextInt(4);
-				if (checkAvailablePos(pos)) {
+				if (checkAvailableCol(pos)) {
 					this.color = pos;
 				} else {
-					this.color = getAvailablePos();
+					this.color = getAvailableCol();
 				}
 				if (spawnTime == 0) {
 					spawnTime = (rand.nextInt(9) + 1) * 60;
@@ -35,7 +35,7 @@ public class GhostSpawnner extends BaseDynamic {
 					spawnTime--;
 				}
 			} else {
-				pos = this.getAvailablePos();
+				pos = this.getAvailableCol();
 				if (pos != -1) {
 					this.color = pos;
 				}
@@ -56,9 +56,9 @@ public class GhostSpawnner extends BaseDynamic {
 		int red = 0, blue = 0, pink = 0, orange = 0;
 		for (BaseDynamic ghost : handler.getMap().getEnemiesOnMap()) {
 			if (ghost instanceof Ghost) {
-				if (handler.getPacManState().level == 0) {
+				if (handler.getPacManState().level <= 1) {
 					colorAvailability[((Ghost) ghost).color] = true;
-				} else if (handler.getPacManState().level == 1) {
+				} else if (handler.getPacManState().level == 2) {
 					switch (((Ghost) ghost).color) {
 					case 0:
 						red++;
@@ -81,7 +81,7 @@ public class GhostSpawnner extends BaseDynamic {
 						colorAvailability[2] = true;
 					if (orange == 2)
 						colorAvailability[3] = true;
-				} else if (handler.getPacManState().level == 2) {
+				} else if (handler.getPacManState().level == 3) {
 					switch (((Ghost) ghost).color) {
 					case 0:
 						red++;
@@ -111,7 +111,7 @@ public class GhostSpawnner extends BaseDynamic {
 
 	// checks if there is a unused color, if there is, returns the corresponding
 	// number, else returns -1.
-	public int getAvailablePos() {
+	public int getAvailableCol() {
 		for (int i = 0; i < colorAvailability.length; i++) {
 			if (!colorAvailability[i]) {
 				return i;
@@ -122,11 +122,25 @@ public class GhostSpawnner extends BaseDynamic {
 
 	// checks if the parameter is a unused color, if it is, returns true, else
 	// returns false.
-	public boolean checkAvailablePos(int pos) {
+	public boolean checkAvailableCol(int pos) {
 		if (!colorAvailability[pos]) {
 			return true;
 		}
 		return false;
+	}
+	
+	public int ghostLimit(int level) {
+		switch(level) {
+		case 0:
+			return 4;
+		case 1:
+			return 4;
+		case 2:
+			return 8;
+		case 3:
+			return 12;
+		}
+		return -1;
 	}
 
 	public int getSpawnTime() {

@@ -28,7 +28,7 @@ public class PacManState extends State {
 
 	public PacManState(Handler handler) {
 		super(handler);
-		handler.setMap(MapBuilder.createMap(Images.maps[0], handler));
+		handler.setMap(MapBuilder.createMap(Images.maps[level], handler));
 
 	}
 
