@@ -12,14 +12,14 @@ import java.awt.image.BufferedImage;
 
 public class EnemyBee extends BaseEntity {
 	int row,col;//row 3-4, col 0-7
-    boolean justSpawned=true,attacking=false, positioned=false,hit=false,centered = false, noAddScore = false;
+    boolean justSpawned=true,attacking=false, positioned=false,hit=false,centered = false, noAddScore = false, hasNotSpun = true;
     Animation idle,turn90Left;
     int spawnPos;//0 is left 1 is top, 2 is right, 3 is bottom
     int formationX,formationY,speed,centerCoolDown=60;
-    int timeAlive=0;
+    int timeAlive=0, attackPattern2 = 10;
     int BeeScore=100;
-	int TimePos=60*random.nextInt(12), spinCounter = 0;
-	int[] attackPattern = new int[3];
+	int TimePos=60*random.nextInt(12), spinCounter = 12;
+	int[] attackPattern = new int[2];
   
     
     public EnemyBee(int x, int y, int width, int height, Handler handler,int row, int col, EntityManager enemies) {
@@ -185,66 +185,72 @@ public class EnemyBee extends BaseEntity {
         	}
         	
         	
-        }else if (attacking){  
-        	if(x == handler.getGalagaState().entityManager.playerShip.x || attackPattern[1] == 3) {
-        		attackPattern[1] = 3;
-        		attackPattern[2] = 1;
-        		switch(attackPattern[2]) {
-        		case 0:
-        			x+=speed;
-        			spinCounter--;
-        			if (spinCounter <= 0) {
-        				attackPattern[2] = 1;
-        				spinCounter = 2;
-        			}
-        			break;
-        		case 1:
-        			y-=speed;
-        			spinCounter--;
-        			if (spinCounter <= 0) {
-        				attackPattern[2] = 2;
-        				spinCounter = 2;
-        			}
-        			break;
-        		case 2:
-        			x-=speed;
-        			spinCounter--;
-        			if (spinCounter <= 0) {
-        				attackPattern[2] = 3;
-        				spinCounter = 2;
-        			}
-        			break;
-        		case 3:
-        			y+=speed;
-        			break;
-        		}
-            }
-        	else if(x <= handler.getWidth()/4+2 || attackPattern[1] == 2) {
-        		attackPattern[1] = 2; 
-        	    y+=speed;
-        	    x+=speed/6 * 5;
-        	    if(x == (handler.getWidth()-handler.getWidth()/4-63)) {
-        	    	attackPattern[1] = 1; 
-        	    }
-        	}else if(x >= (handler.getWidth()-handler.getWidth()/4-63) || attackPattern[1] == 1) {
-        		attackPattern[1] = 1; 
-        		y+=speed;
-        		x-=speed/6 * 5;
-        		if(x == handler.getWidth()/4) {
-        			attackPattern[1] = 2;
-        		}
-        	}else {
-        		switch(attackPattern[0]) {
-        		case 0:
-        			y+=speed;
-        			x+=speed;
-        			break;
-        		case 1:
-        			y+=speed;
-        			x-=speed;
-        			break;
-        		}
-        	}
+		} else if (attacking) {
+
+			if ((this.x >= handler.getGalagaState().entityManager.playerShip.x - 10
+					&& this.x <= handler.getGalagaState().entityManager.playerShip.x + 10) && hasNotSpun) {// Initializes the spin sequence.
+				attackPattern2 = 0;
+				hasNotSpun = false;
+			} else if (x <= handler.getWidth() / 4 + 2 || attackPattern[1] == 2) {// move diagonally right
+				attackPattern[1] = 2;
+				y += speed;
+				x += speed / 6 * 5;
+				if (x == (handler.getWidth() - handler.getWidth() / 4 - 63)) {// Avoid getting out of the screen (sides)
+					attackPattern[1] = 1;
+				}
+			} else if (x >= (handler.getWidth() - handler.getWidth() / 4 - 63) || attackPattern[1] == 1) {// move diagonally left
+				attackPattern[1] = 1;
+				y += speed;
+				x -= speed / 6 * 5;
+				if (x == handler.getWidth() / 4) {// Avoid getting out of the screen (sides)
+					attackPattern[1] = 2;
+				}
+			} else {// Spin Sequence
+				switch (attackPattern2) {
+				case 0:
+					x += speed;
+//        			attackPattern2 = 1;
+					spinCounter--;
+					if (spinCounter <= 0) {
+						attackPattern2 = 1;
+						spinCounter = 12;
+					}
+					break;
+				case 1:
+					y -= speed;
+//        			attackPattern2 = 2;
+					spinCounter--;
+					if (spinCounter <= 0) {
+						attackPattern2 = 2;
+						spinCounter = 12;
+					}
+					break;
+				case 2:
+					x -= speed;
+//        			attackPattern2 = 3;
+					spinCounter--;
+					if (spinCounter <= 0) {
+						attackPattern2 = 3;
+						spinCounter = 12;
+					}
+					break;
+				case 3:
+					y += speed;
+					break;
+				}
+				if (attackPattern2 == 10) {
+					switch (attackPattern[0]) {
+					case 0:
+						y += speed;
+						x += speed;
+						break;
+					case 1:
+						y += speed;
+						x -= speed;
+						break;
+					}
+				}
+			}
         	
        	
         	// kills enemy bee if out of screen.
