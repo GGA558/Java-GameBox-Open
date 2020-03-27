@@ -286,4 +286,8 @@ public class PlayerShip extends BaseEntity{
     		}
     	}return false;
     }
+    
+    public boolean isDestroyed() {
+    	return destroyed;
+    }
 }

@@ -24,12 +24,12 @@ public class EntityManager {
         playerShip.tick();
         
     	ArrayList<BaseEntity> toRemove = new ArrayList<>();
-    	ArrayList<BaseEntity> toAdd= new ArrayList<>();
+//    	ArrayList<BaseEntity> toAdd= new ArrayList<>();
         
-    	for(BaseEntity entity: enemyentities) {
-    		toAdd.add(entity);
-    		continue;
-    		}
+//    	for(BaseEntity entity: enemyentities) {
+//    		toAdd.add(entity);
+//    		continue;
+//    		}
     	entities.addAll(enemyentities);
     	enemyentities.clear();	
     	
