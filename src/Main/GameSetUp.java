@@ -161,6 +161,9 @@ public class GameSetUp implements Runnable {
                 handler.getMusicHandler().pauseMusic();
             }
         }
+        if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)){
+        	handler.getGalagaState().setState(handler.getPauseState());
+        }
 
 
         //game states are the menus

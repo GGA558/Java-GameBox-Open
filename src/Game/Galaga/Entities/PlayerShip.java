@@ -118,9 +118,7 @@ public class PlayerShip extends BaseEntity{
             	spawnEShip(random.nextInt(2), random.nextInt(8));
 
             }
-            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_T)){
-            	handler.getGalagaState().setState(handler.getPauseState());
-            }
+
                         
             bounds.x = x;
         }
